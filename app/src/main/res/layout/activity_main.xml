@@ -68,13 +68,31 @@
                             android:layout_margin="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
-                        <ImageButton
-                            android:id="@+id/button_search"
-                            android:src="@drawable/ic_search"
-                            android:background="@drawable/rounded_bg"
-                            android:padding="8dp"
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <ImageButton
+                                android:id="@+id/button_search"
+                                android:src="@drawable/ic_search"
+                                android:background="@drawable/rounded_bg"
+                                android:padding="8dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <ImageButton
+                                android:id="@+id/button_show_favorites"
+                                android:src="@drawable/ic_star_filled"
+                                android:background="@drawable/rounded_bg"
+                                android:padding="8dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

@@ -1,17 +1,12 @@
 package com.example.university;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -21,113 +16,123 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements WebClickListener {
 
-    RecyclerView recyclerView;
-    UnivAdapter adapter;
-    ImageButton button;
-    EditText editText_name, editText_country;
-    String name = "";
-    String country = "";
-    RequestManager manager;
-    ProgressBar progressBar;
-    CardView recycler_holder;
+    private RecyclerView recyclerView;
+    private UnivAdapter adapter;
+    private ImageButton button_search; // Renamed for clarity
+    private EditText editText_name, editText_country;
+    private ProgressBar progressBar;
+    private UnivViewModel univViewModel;
+    private List<UniversityEntity> favoritesList = new ArrayList<>();
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize views
+        univViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(UnivViewModel.class);
+
+        setupViews();
+        setupRecyclerView();
+        observeViewModel();
+
+        button_search.setOnClickListener(view -> {
+            String name = editText_name.getText().toString().trim();
+            String country = editText_country.getText().toString().trim();
+
+            if (name.isEmpty() && country.isEmpty()) {
+                Toast.makeText(MainActivity.this, "Enter University name or Country name.", Toast.LENGTH_LONG).show();
+                return;
+            }
+            univViewModel.searchUniversities(name, country);
+        });
+
+        // === بداية التعديل ===
+        // Find the favorites button and set its click listener
+        ImageButton buttonShowFavorites = findViewById(R.id.button_show_favorites);
+        buttonShowFavorites.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, FavoritesActivity.class);
+            startActivity(intent);
+        });
+        // === نهاية التعديل ===
+    }
+
+    private void setupViews() {
         recyclerView = findViewById(R.id.recycler_list);
         editText_name = findViewById(R.id.editText_name);
         editText_country = findViewById(R.id.editText_country);
-        button = findViewById(R.id.button_search);
-        recycler_holder = findViewById(R.id.recycler_holder);
-        progressBar = findViewById(R.id.loader);  // Ensure this ID exists in your layout
+        button_search = findViewById(R.id.button_search); // Corrected variable name
+        progressBar = findViewById(R.id.loader);
+    }
 
-        // Initialize manager
-        manager = new RequestManager(MainActivity.this);
+    private void setupRecyclerView() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+    }
 
-        // Set up button click listener
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                name = editText_name.getText().toString().trim();
-                country = editText_country.getText().toString().trim();
+    private void observeViewModel() {
+        univViewModel.getUniversityList().observe(this, universities -> {
+            if (universities != null) {
+                showResult(universities);
+            }
+        });
 
-                if (name.equals("") && country.equals("")) {
-                    Toast.makeText(MainActivity.this, "Enter University name or Country name.", Toast.LENGTH_LONG).show();
+        univViewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading != null && isLoading) {
+                progressBar.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+            } else {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+
+        univViewModel.getError().observe(this, errorMessage -> {
+            if (errorMessage != null && !errorMessage.isEmpty()) {
+                if (errorMessage.equals("No Data Found!")) {
+                    showNoResultsDialog();
                 } else {
-                    recyclerView.setVisibility(View.GONE);  // Only hide RecyclerView if search is triggered
-                    progressBar.setVisibility(View.VISIBLE);
-
-                    // Trigger appropriate request
-                    if (name.equals("")) {
-                        manager.getUnivByCountry(listener, country);
-                    } else if (country.equals("")) {
-                        manager.getUnivByName(listener, name);
-                    } else {
-                        manager.getUniv(listener, name, country);
-                    }
+                    Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        univViewModel.getAllFavorites().observe(this, favorites -> {
+            Log.d("FAVORITES_DEBUG", "Favorites list updated. Count: " + favorites.size());
+            this.favoritesList = favorites;
+            if (adapter != null) {
+                adapter.setFavorites(favorites);
             }
         });
     }
 
-    private final OnFetchDataListener listener = new OnFetchDataListener() {
-        @Override
-        public void onResponse(List<APIResponse> responses, String message) {
-            progressBar.setVisibility(View.GONE);
-
-            if (responses == null || responses.isEmpty()) {
-                // Show an alert dialog if no results found
-                showNoResultsDialog();
-            } else {
-                showResult(responses);
-            }
-        }
-
-        @Override
-        public void onError(String message) {
-            progressBar.setVisibility(View.GONE);
-            Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-        }
-    };
+    private void showResult(List<APIResponse> responses) {
+        adapter = new UnivAdapter(this, responses, this, univViewModel);
+        adapter.setFavorites(favoritesList);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setVisibility(View.VISIBLE);
+    }
 
     private void showNoResultsDialog() {
         final Dialog alertDialog = new Dialog(MainActivity.this);
         alertDialog.setContentView(R.layout.custom_alert_dialog);
-        alertDialog.setTitle("Oops!");
-        alertDialog.setCancelable(true);  // Allow the dialog to be dismissed by tapping outside
-
+        alertDialog.setCancelable(true);
         Button ok_button = alertDialog.findViewById(R.id.button_alert);
-        ok_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog.dismiss();
-            }
-        });
-
+        ok_button.setOnClickListener(v -> alertDialog.dismiss());
         Window window = alertDialog.getWindow();
         if (window != null) {
             window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
             window.setGravity(Gravity.CENTER);
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
         alertDialog.show();
-    }
-
-    private void showResult(List<APIResponse> responses) {
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new UnivAdapter(this, responses, this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override

@@ -20,20 +20,31 @@ public class RequestManager {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
+    // قمنا بإنشاء الواجهة مرة واحدة هنا
+    private final UniversityApiService apiService;
+
     public RequestManager(Context context) {
         this.context = context;
+        // وقمنا بتعريفها في الكونستركتور
+        this.apiService = retrofit.create(UniversityApiService.class);
     }
 
-    public void getUniv(OnFetchDataListener listener, String name, String country){
-        getUniversities getUniversities = retrofit.create(getUniversities.class);
-        Call<List<APIResponse>> call =getUniversities.callUniversity(name, country);
+    // هذه هي الدالة الموحدة الجديدة للبحث
+    public void searchUniversities(OnFetchDataListener listener, String name, String country) {
+        // نتحقق إذا كانت المدخلات فارغة ونحولها إلى null
+        // لأن Retrofit تتجاهل الـ Query Parameters التي قيمتها null
+        String finalName = (name != null && !name.isEmpty()) ? name : null;
+        String finalCountry = (country != null && !country.isEmpty()) ? country : null;
 
-        try{
+        Call<List<APIResponse>> call = apiService.callUniversity(finalName, finalCountry);
+
+        try {
             call.enqueue(new Callback<List<APIResponse>>() {
                 @Override
                 public void onResponse(Call<List<APIResponse>> call, Response<List<APIResponse>> response) {
-                    if (!response.isSuccessful()){
-                        Toast.makeText(context, "Request Failed!", Toast.LENGTH_SHORT).show();
+                    if (!response.isSuccessful()) {
+                        Toast.makeText(context, "Request Failed! Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                        listener.onError("Request Failed!"); // إبلاغ الـ listener بالخطأ
                         return;
                     }
                     listener.onResponse(response.body(), response.message());
@@ -43,86 +54,17 @@ public class RequestManager {
                 public void onFailure(Call<List<APIResponse>> call, Throwable t) {
                     listener.onError(t.getMessage());
                 }
-
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(context, "Error Occurred!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "An Error Occurred!", Toast.LENGTH_SHORT).show();
+            listener.onError("An Error Occurred!");
         }
-
     }
 
-    public void getUnivByName(OnFetchDataListener listener, String name){
-        getUniversitiesByName getUniversitiesByName = retrofit.create(getUniversitiesByName.class);
-        Call<List<APIResponse>> call =getUniversitiesByName.callUniversityByName(name);
-
-        try{
-            call.enqueue(new Callback<List<APIResponse>>() {
-                @Override
-                public void onResponse(Call<List<APIResponse>> call, Response<List<APIResponse>> response) {
-                    if (!response.isSuccessful()){
-                        Toast.makeText(context, "Request Failed!", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    listener.onResponse(response.body(), response.message());
-                }
-
-                @Override
-                public void onFailure(Call<List<APIResponse>> call, Throwable t) {
-                    listener.onError(t.getMessage());
-                }
-
-            });
-        }catch (Exception e){
-            e.printStackTrace();
-            Toast.makeText(context, "Error Occurred!!", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-    public void getUnivByCountry(OnFetchDataListener listener, String country){
-        getUniversitiesByCountry getUniversitiesByCountry = retrofit.create(getUniversitiesByCountry.class);
-        Call<List<APIResponse>> call =getUniversitiesByCountry.callUniversityByCountry(country);
-
-        try{
-            call.enqueue(new Callback<List<APIResponse>>() {
-                @Override
-                public void onResponse(Call<List<APIResponse>> call, Response<List<APIResponse>> response) {
-                    if (!response.isSuccessful()){
-                        Toast.makeText(context, "Request Failed!", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    listener.onResponse(response.body(), response.message());
-                }
-
-                @Override
-                public void onFailure(Call<List<APIResponse>> call, Throwable t) {
-                    listener.onError(t.getMessage());
-                }
-
-            });
-        }catch (Exception e){
-            e.printStackTrace();
-            Toast.makeText(context, "Error Occurred!!", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-
-    public interface getUniversitiesByName {
-        @GET("search")
-        Call<List<APIResponse>> callUniversityByName(
-                @Query("name") String name
-        );
-    }
-
-    public interface getUniversitiesByCountry {
-        @GET("search")
-        Call<List<APIResponse>> callUniversityByCountry(
-                @Query("country") String name
-        );
-    }
-
-    public interface getUniversities {
+    // هذه هي الواجهة الموحدة
+    // تقبل اسم ودولة ويمكن أن يكون أحدهما أو كلاهما null
+    public interface UniversityApiService {
         @GET("search")
         Call<List<APIResponse>> callUniversity(
                 @Query("name") String name,
@@ -130,4 +72,3 @@ public class RequestManager {
         );
     }
 }
-
