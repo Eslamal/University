@@ -6,19 +6,15 @@ The app leverages **Artificial Intelligence (Gemini)** to act as a personal acad
 
 ---
 
-## 📱 App Features & Screenshots
+## 📱 App Screenshots
 
-| **University Search** | **AI Advisor (Gemini)** | **GPA Calculator** |
-|:-------------------------:|:-------------------------:|:-------------------------:|
 | | | |
-| Search universities globally<br>with filter options. | Smart chat bot to answer<br>academic queries. | Calculate GPA easily<br>and accurately. |
-
-<br>
-
-| **Lecture Schedule** | **Scholarships Hub** | **Favorites & Settings** |
-|:-------------------------:|:-------------------------:|:-------------------------:|
-| | | |
-| Manage weekly classes<br>with Room Database. | Explore top global<br>scholarship opportunities. | Save universities and<br>customize app theme. |
+|:---:|:---:|:---:|
+| ![Screen 1](universityApp/photo_2026-01-10_14-23-53.jpg) | ![Screen 2](universityApp/photo_2026-01-10_14-23-55.jpg) | ![Screen 3](universityApp/photo_2026-01-10_14-23-56.jpg) |
+| ![Screen 4](universityApp/photo_2026-01-10_14-23-57.jpg) | ![Screen 5](universityApp/photo_2026-01-10_14-23-58.jpg) | ![Screen 6](universityApp/photo_2026-01-10_14-23-59.jpg) |
+| ![Screen 7](universityApp/photo_2026-01-10_14-23-00.jpg) | ![Screen 8](universityApp/photo_2026-01-10_14-23-09.jpg) | ![Screen 9](universityApp/photo_2026-01-10_14-23-01.jpg) |
+| ![Screen 10](universityApp/photo_2026-01-10_14-23-02.jpg) | ![Screen 11](universityApp/photo_2026-01-10_14-23-03.jpg) | ![Screen 12](universityApp/photo_2026-01-10_14-23-04.jpg) |
+| ![Screen 13](universityApp/photo_2026-01-10_14-23-05.jpg) | ![Screen 14](universityApp/photo_2026-01-10_14-23-06.jpg) | ![Screen 15](universityApp/photo_2026-01-10_14-23-07.jpg) |
 
 ---
 
