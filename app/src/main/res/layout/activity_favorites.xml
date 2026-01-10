@@ -1,27 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purp"
-    tools:context=".FavoritesActivity">
+    android:background="@color/main_background"
+    tools:context=".ui.FavoritesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_favorites"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
+        android:clipToPadding="false"
         tools:listitem="@layout/list_univ" />
 
-    <TextView
-        android:id="@+id/textView_no_favorites"
+    <LinearLayout
+        android:id="@+id/layout_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No Favorites Added Yet!"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_centerInParent="true"
-        android:visibility="gone"/>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
 
-</RelativeLayout>
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/empty_state" />
+
+        <TextView
+            android:id="@+id/textView_no_favorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/no_favorites"
+            android:textColor="@color/text_secondary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</FrameLayout>

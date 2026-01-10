@@ -1,4 +1,4 @@
-package com.example.university;
+package com.example.university.data;
 
 import android.content.Context;
 

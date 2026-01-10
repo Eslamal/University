@@ -1,9 +1,17 @@
-package com.example.university;
+package com.example.university.data;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class APIResponse {
+
+    public APIResponse(String name, String country, String alphaTwoCode, String webPage) {
+        this.name = name;
+        this.country = country;
+        this.alphaTwoCode = alphaTwoCode;
+        this.webPages = new java.util.ArrayList<>();
+        this.webPages.add(webPage);
+    }
 
     @SerializedName("alpha_two_code")
     private String alphaTwoCode = "";

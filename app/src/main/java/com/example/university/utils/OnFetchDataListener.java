@@ -1,4 +1,6 @@
-package com.example.university;
+package com.example.university.utils;
+
+import com.example.university.data.APIResponse;
 
 import java.util.List;
 

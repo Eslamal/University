@@ -1,15 +1,19 @@
-package com.example.university;
+package com.example.university.ui;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.LinearLayout; // استيراد LinearLayout
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.university.R;
+import com.example.university.utils.WebClickListener;
+
 import java.util.ArrayList;
 
 public class FavoritesActivity extends AppCompatActivity implements WebClickListener {
@@ -17,7 +21,9 @@ public class FavoritesActivity extends AppCompatActivity implements WebClickList
     private RecyclerView recyclerView;
     private FavoritesAdapter adapter;
     private UnivViewModel univViewModel;
-    private TextView textViewNoFavorites;
+
+    // غيرنا المتغير من TextView لـ LinearLayout عشان يتحكم في الكونتينر كله
+    private LinearLayout layoutEmpty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +32,9 @@ public class FavoritesActivity extends AppCompatActivity implements WebClickList
 
         // تعريف الـ Views
         recyclerView = findViewById(R.id.recycler_favorites);
-        textViewNoFavorites = findViewById(R.id.textView_no_favorites);
+
+        // هنا بنربط بالـ ID الجديد اللي في الـ XML
+        layoutEmpty = findViewById(R.id.layout_empty);
 
         // تهيئة الـ ViewModel
         univViewModel = new ViewModelProvider(this,
@@ -48,11 +56,13 @@ public class FavoritesActivity extends AppCompatActivity implements WebClickList
     private void observeFavorites() {
         univViewModel.getAllFavorites().observe(this, favorites -> {
             if (favorites == null || favorites.isEmpty()) {
+                // لو القائمة فاضية: اخفي القائمة واظهر الأنيميشن
                 recyclerView.setVisibility(View.GONE);
-                textViewNoFavorites.setVisibility(View.VISIBLE);
+                layoutEmpty.setVisibility(View.VISIBLE);
             } else {
+                // لو فيه بيانات: اظهر القائمة واخفي الأنيميشن
                 recyclerView.setVisibility(View.VISIBLE);
-                textViewNoFavorites.setVisibility(View.GONE);
+                layoutEmpty.setVisibility(View.GONE);
                 // تحديث بيانات الـ Adapter
                 adapter.updateFavorites(favorites);
             }

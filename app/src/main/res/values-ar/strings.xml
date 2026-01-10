@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hint_name">اسم الجامعة</string>
+    <string name="hint_country">الدولة</string>
+    <string name="btn_search">بحث</string>
+    <string name="no_data">لا توجد نتائج!</string>
+    <string name="visit_website">زيارة الموقع</string>
+    <string name="favorites_title">المفضلة</string>
+    <string name="settings_title">الإعدادات</string>
+    <string name="language_label">اللغة</string>
+    <string name="theme_label">المظهر</string>
+    <string name="dark_mode">داكن</string>
+    <string name="light_mode">فاتح</string>
+    <string name="system_default">النظام الافتراضي</string>
+    <string name="arabic">العربية</string>
+    <string name="english">English</string>
+    <string name="no_favorites">لا توجد جامعات في المفضلة!</string>
+
+    <string name="gpa_title">حاسبة التقديرات</string>
+    <string name="your_gpa">المعدل التراكمي</string>
+    <string name="btn_add_subject">+ إضافة مادة</string>
+    <string name="btn_calculate">احسب المعدل</string>
+    <string name="hint_subject_name">اسم المادة</string>
+    <string name="hint_credits">الساعات</string>
+    <string name="error_enter_credits">يرجى إدخال الساعات المعتمدة</string>
+    <string name="gpa_desc">حاسبة المعدل</string>
+    <string name="or_text">— أو —</string>
+
+    <string name="ai_advisor_title">مستشار الجامعات الذكي</string>
+    <string name="chat_hint">اسأل عن المنح الدراسية...</string>
+    <string name="ai_welcome_msg">أهلاً بك! أنا مستشارك الذكي للجامعات. اسألني عن المنح، أفضل الجامعات، أو المتطلبات.</string>
+
+    <string name="ai_res_hello">مرحباً! كيف يمكنني مساعدتك اليوم؟</string>
+    <string name="ai_res_scholarship">معظم الجامعات تقدم منحاً بناءً على التفوق أو الحاجة المادية. يمكنك مراجعة قسم "المساعدات المالية" في موقع الجامعة.</string>
+    <string name="ai_res_harvard">جامعة هارفارد هي واحدة من أفضل الجامعات في العالم، وتقع في كامبريدج، الولايات المتحدة.</string>
+    <string name="ai_res_gpa">يمكنك حساب معدلك التراكمي (GPA) باستخدام الأداة الموجودة في الصفحة الرئيسية للتطبيق!</string>
+    <string name="ai_res_default">سؤال مثير للاهتمام! أنصحك بالبحث عن اسم الجامعة في شريط البحث لدينا للوصول لموقعهم الرسمي.</string>
+</resources>
