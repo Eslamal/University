@@ -15,9 +15,7 @@ public interface UniversityApiService {
             @Query("country") String country
     );
 
-    // في UniversityApiService.java
 
-    // رابط خدمة تحويل الـ RSS لـ JSON
     @GET("https://api.rss2json.com/v1/api.json?rss_url=https://scholarship-positions.com/feed/")
     Call<ScholarshipResponse> getRealScholarships();
 }

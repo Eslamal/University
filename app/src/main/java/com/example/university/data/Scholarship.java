@@ -5,7 +5,7 @@ public class Scholarship {
     private String country;
     private String description;
     private String link;
-    private int colorRes; // لون مميز لكل منحة
+    private int colorRes;
 
     public Scholarship(String name, String country, String description, String link, int colorRes) {
         this.name = name;

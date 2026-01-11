@@ -15,15 +15,13 @@ public class ScholarshipActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scholarship); // هنعمل الـ XML ده حالا
+        setContentView(R.layout.activity_scholarship);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_scholarships);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // زرار الرجوع
         findViewById(R.id.btn_back).setOnClickListener(v -> finish());
 
-        // --- إضافة بيانات المنح ---
         List<Scholarship> list = new ArrayList<>();
 
         list.add(new Scholarship("Chevening", "United Kingdom",
@@ -44,7 +42,7 @@ public class ScholarshipActivity extends AppCompatActivity {
 
         list.add(new Scholarship("Turkiye Burslari", "Turkey",
                 "Turkey Scholarships is a government-funded, competitive scholarship program.",
-                "https://www.turkiyeburslari.gov.tr/", R.color.red_dark)); // محتاجين نعرف اللون ده
+                "https://www.turkiyeburslari.gov.tr/", R.color.red_dark));
 
         ScholarshipAdapter adapter = new ScholarshipAdapter(this, list);
         recyclerView.setAdapter(adapter);

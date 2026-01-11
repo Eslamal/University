@@ -13,14 +13,12 @@ import java.util.List;
 public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.ViewHolder> {
 
     private List<Lecture> lectures;
-    private OnLectureClickListener listener; // واجهة للتفاعل
+    private OnLectureClickListener listener;
 
-    // 1. تعريف واجهة (Interface) للضغط
     public interface OnLectureClickListener {
         void onLectureClick(Lecture lecture);
     }
 
-    // 2. تعديل الكونستركتور لاستقبال الليسنر
     public LectureAdapter(List<Lecture> lectures, OnLectureClickListener listener) {
         this.lectures = lectures;
         this.listener = listener;
@@ -48,7 +46,6 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.ViewHold
         holder.tvTime.setText(lecture.time);
         holder.viewColorStrip.setBackgroundColor(lecture.color);
 
-        // 3. عند الضغط على الكارت، نرسل المحاضرة للـ Activity
         holder.itemView.setOnClickListener(v -> listener.onLectureClick(lecture));
     }
 

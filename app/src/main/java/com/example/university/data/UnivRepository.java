@@ -21,11 +21,9 @@ public class UnivRepository {
         UnivDatabase db = UnivDatabase.getDatabase(application);
         this.favoriteDao = db.favoriteDao();
         this.executorService = UnivDatabase.databaseWriteExecutor;
-        // هنا التعديل المهم: استخدام RetrofitClient بدلاً من RequestManager
         this.apiService = RetrofitClient.getService();
     }
 
-    // --- جلب البيانات من الإنترنت ---
     public void searchUniversities(OnFetchDataListener listener, String name, String country) {
         String queryName = (name != null && !name.trim().isEmpty()) ? name : null;
         String queryCountry = (country != null && !country.trim().isEmpty()) ? country : null;
@@ -47,7 +45,6 @@ public class UnivRepository {
         });
     }
 
-    // --- التعامل مع قاعدة البيانات المحلية ---
     public LiveData<List<UniversityEntity>> getAllFavorites() {
         return favoriteDao.getAllFavorites();
     }

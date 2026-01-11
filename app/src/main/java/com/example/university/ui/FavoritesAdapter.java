@@ -47,7 +47,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<UnivViewHolder> {
         String url = favorite.getWebPage();
         String country = favorite.getCountry();
 
-        // 1. تعيين النصوص
         holder.textView_name.setText(name);
         holder.textView_country.setText(country);
 
@@ -57,14 +56,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<UnivViewHolder> {
             holder.textView_province.setText("No website available");
         }
 
-        // 2. برمجة زرار الويب
         holder.button_web.setOnClickListener(v -> {
             if (url != null && !url.isEmpty()) {
                 webClickListener.OnClicked(url);
             }
         });
 
-        // 3. برمجة زرار المشاركة (Share) - (جديد)
         holder.btn_share.setOnClickListener(v -> {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
@@ -73,7 +70,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<UnivViewHolder> {
             context.startActivity(Intent.createChooser(sendIntent, "Share via"));
         });
 
-        // 4. برمجة زرار الخريطة (Map) - (جديد)
         holder.btn_map.setOnClickListener(v -> {
             Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(name));
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
@@ -88,8 +84,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<UnivViewHolder> {
             }
         });
 
-        // 5. برمجة زرار الحذف من المفضلة
-        // في شاشة المفضلة، الزرار دايماً شكله "نجمة مليانة" ولما تدوس عليه يحذف
         holder.button_favorite.setImageResource(R.drawable.ic_star_filled);
         holder.button_favorite.setOnClickListener(v -> {
             viewModel.deleteFavorite(favorite);

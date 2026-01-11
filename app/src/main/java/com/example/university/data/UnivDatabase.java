@@ -9,8 +9,6 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-
-
 @Database(entities = {UniversityEntity.class}, version = 1, exportSchema = false)
 public abstract class UnivDatabase extends RoomDatabase {
 
@@ -27,7 +25,6 @@ public abstract class UnivDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     UnivDatabase.class, "university_database")
-                            // .allowMainThreadQueries() // <<< امسح هذا السطر
                             .build();
                 }
             }

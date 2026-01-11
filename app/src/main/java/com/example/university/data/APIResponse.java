@@ -31,7 +31,6 @@ public class APIResponse {
     @SerializedName("state-province")
     private String stateProvince = "";
 
-    // Getter methods
     public String getAlphaTwoCode() {
         return alphaTwoCode;
     }

@@ -42,14 +42,12 @@ public class ScheduleActivity extends AppCompatActivity {
         loadLectures();
 
         FloatingActionButton fabAdd = findViewById(R.id.fab_add_lecture);
-        // عند الضغط على الزر العائم -> إضافة محاضرة جديدة (نرسل null)
         fabAdd.setOnClickListener(v -> showLectureDialog(null));
     }
 
     private void loadLectures() {
         lectureList = database.lectureDao().getAllLectures();
         if (adapter == null) {
-            // نمرر this::showLectureDialog عشان لما نضغط على عنصر يفتح التعديل
             adapter = new LectureAdapter(lectureList, this::showLectureDialog);
             recyclerView.setAdapter(adapter);
         } else {
@@ -57,14 +55,12 @@ public class ScheduleActivity extends AppCompatActivity {
         }
     }
 
-    // دالة واحدة للإضافة والتعديل
     private void showLectureDialog(Lecture lectureToEdit) {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_add_lecture);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        // ربط العناصر
         TextView tvTitle = dialog.findViewById(R.id.tv_dialog_title);
         EditText etCourse = dialog.findViewById(R.id.et_course_name);
         EditText etRoom = dialog.findViewById(R.id.et_room);
@@ -72,19 +68,16 @@ public class ScheduleActivity extends AppCompatActivity {
         EditText etDay = dialog.findViewById(R.id.et_day);
         EditText etTime = dialog.findViewById(R.id.et_time);
         Button btnSave = dialog.findViewById(R.id.btn_save_lecture);
-        Button btnDelete = dialog.findViewById(R.id.btn_delete_lecture); // زرار الحذف الجديد
+        Button btnDelete = dialog.findViewById(R.id.btn_delete_lecture);
 
-        // تحديد الوضع (إضافة أم تعديل)
         if (lectureToEdit == null) {
-            // وضع الإضافة
             tvTitle.setText(getString(R.string.dialog_add_title));
             btnSave.setText(getString(R.string.btn_save));
-            btnDelete.setVisibility(View.GONE); // إخفاء زر الحذف
+            btnDelete.setVisibility(View.GONE);
         } else {
-            // وضع التعديل (ملء البيانات القديمة)
             tvTitle.setText(getString(R.string.dialog_edit_title));
             btnSave.setText(getString(R.string.btn_update));
-            btnDelete.setVisibility(View.VISIBLE); // إظهار زر الحذف
+            btnDelete.setVisibility(View.VISIBLE);
 
             etCourse.setText(lectureToEdit.courseName);
             etRoom.setText(lectureToEdit.room);
@@ -93,7 +86,6 @@ public class ScheduleActivity extends AppCompatActivity {
             etTime.setText(lectureToEdit.time);
         }
 
-        // برمجة زر الحفظ/التعديل
         btnSave.setOnClickListener(v -> {
             String course = etCourse.getText().toString().trim();
             String room = etRoom.getText().toString().trim();
@@ -107,18 +99,15 @@ public class ScheduleActivity extends AppCompatActivity {
             }
 
             if (lectureToEdit == null) {
-                // إنشاء جديد
                 Lecture newLecture = new Lecture(course, room, professor, day, time, getRandomColor());
                 database.lectureDao().insert(newLecture);
                 Toast.makeText(this, getString(R.string.msg_added), Toast.LENGTH_SHORT).show();
             } else {
-                // تعديل الحالي (تحديث البيانات في نفس الكائن)
                 lectureToEdit.courseName = course;
                 lectureToEdit.room = room;
                 lectureToEdit.professor = professor;
                 lectureToEdit.day = day;
                 lectureToEdit.time = time;
-                // الـ ID واللون زي ما هما
                 database.lectureDao().update(lectureToEdit);
                 Toast.makeText(this, getString(R.string.msg_updated), Toast.LENGTH_SHORT).show();
             }
@@ -127,7 +116,6 @@ public class ScheduleActivity extends AppCompatActivity {
             dialog.dismiss();
         });
 
-        // برمجة زر الحذف
         btnDelete.setOnClickListener(v -> {
             if (lectureToEdit != null) {
                 database.lectureDao().delete(lectureToEdit);

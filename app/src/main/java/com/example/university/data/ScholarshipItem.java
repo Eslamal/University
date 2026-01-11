@@ -15,12 +15,10 @@ public class ScholarshipItem {
     @SerializedName("description")
     private String description;
 
-    // Getters
     public String getTitle() { return title; }
     public String getPubDate() { return pubDate; }
     public String getLink() { return link; }
 
-    // وصف المنحة بيجي فيه HTML كتير، الدالة دي بتنظفه
     public String getDescription() {
         return description.replaceAll("<.*?>", "").trim();
     }

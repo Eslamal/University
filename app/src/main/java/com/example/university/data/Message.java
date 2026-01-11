@@ -2,7 +2,7 @@ package com.example.university.data;
 
 public class Message {
     private String text;
-    private boolean isSentByMe; // لو true يبقى أنا المرسل، false يبقى البوت
+    private boolean isSentByMe;
 
     public Message(String text, boolean isSentByMe) {
         this.text = text;

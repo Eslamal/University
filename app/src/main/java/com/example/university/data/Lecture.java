@@ -14,9 +14,8 @@ public class Lecture {
     public String professor;
     public String day;
     public String time;
-    public int color; // لون الشريط الجانبي
+    public int color;
 
-    // Constructor
     public Lecture(String courseName, String room, String professor, String day, String time, int color) {
         this.courseName = courseName;
         this.room = room;

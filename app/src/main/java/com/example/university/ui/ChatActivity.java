@@ -29,7 +29,6 @@ public class ChatActivity extends AppCompatActivity {
     private EditText etMessage;
     private ImageButton btnSend;
 
-    // ⚠️⚠️ هام جداً: حط مفتاح الـ API بتاعك هنا مكان الكلمة دي
     private static final String API_KEY = "AIzaSyDYD9hxiVBOoz8LxgwxVBjxxC5Qro8SZEA";
 
     private static final String URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + API_KEY;
@@ -47,7 +46,6 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        // رسالة ترحيب
         receiveBotResponse("Hello! I am connected to Gemini AI. Ask me anything about universities!");
 
         btnSend.setOnClickListener(v -> {
@@ -56,7 +54,6 @@ public class ChatActivity extends AppCompatActivity {
                 sendMessage(text);
                 etMessage.setText("");
 
-                // هنا بننادي على الـ AI الحقيقي
                 callGeminiAI(text);
             }
         });
@@ -68,7 +65,6 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void receiveBotResponse(String text) {
-        // لازم نستخدم runOnUiThread لأن الرد بيجي من Network Thread
         runOnUiThread(() -> {
             adapter.addMessage(new Message(text, false));
             recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
@@ -76,10 +72,8 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void callGeminiAI(String question) {
-        // 1. اعرض رسالة "Typing..." للمستخدم
         receiveBotResponse("Typing...");
 
-        // إعدادات الوقت (Timeout) عشان النت
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(60, java.util.concurrent.TimeUnit.SECONDS)
                 .writeTimeout(60, java.util.concurrent.TimeUnit.SECONDS)
@@ -98,7 +92,6 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 runOnUiThread(() -> {
-                    // لو حصل خطأ، امسح Typing واعرض المشكلة
                     if (adapter != null) adapter.removeLastItem();
                     receiveBotResponse("Failed to connect: " + e.getMessage());
                 });
@@ -118,10 +111,8 @@ public class ChatActivity extends AppCompatActivity {
                                 .getString("text");
 
                         runOnUiThread(() -> {
-                            // 2. الرد وصل! امسح كلمة Typing الأول
                             if (adapter != null) adapter.removeLastItem();
 
-                            // 3. اعرض الرد الحقيقي
                             receiveBotResponse(aiReply);
                         });
 
@@ -141,7 +132,6 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-    // دالة بسيطة عشان لو النص فيه علامات تنصيص ميبوظش الـ JSON
     private String escapeJson(String data) {
         return data.replace("\"", "\\\"").replace("\n", "\\n");
     }

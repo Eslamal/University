@@ -40,7 +40,6 @@ public class ScholarshipAdapter extends RecyclerView.Adapter<ScholarshipAdapter.
         holder.tvDesc.setText(item.getDescription());
         holder.tvLetter.setText(String.valueOf(item.getName().charAt(0)));
 
-        // تغيير لون الهيدر حسب المنحة
         holder.layoutHeader.setBackgroundColor(context.getResources().getColor(item.getColorRes()));
 
         holder.btnApply.setOnClickListener(v -> {

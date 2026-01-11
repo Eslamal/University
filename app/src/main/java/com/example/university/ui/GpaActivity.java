@@ -20,9 +20,7 @@ public class GpaActivity extends AppCompatActivity {
 
     private LinearLayout layoutCourseList;
     private TextView tvResult;
-    // قائمة التقديرات
     private final String[] grades = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"};
-    // قيم التقديرات المقابلة
     private final double[] gradePoints = {4.0, 4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 1.3, 1.0, 0.0};
 
     @Override
@@ -35,7 +33,6 @@ public class GpaActivity extends AppCompatActivity {
         Button btnAdd = findViewById(R.id.btn_add_course);
         Button btnCalc = findViewById(R.id.btn_calculate);
 
-        // إضافة مادة افتراضية في البداية
         addCourseRow();
 
         btnAdd.setOnClickListener(v -> addCourseRow());
@@ -49,17 +46,14 @@ public class GpaActivity extends AppCompatActivity {
         Spinner spinnerGrade = view.findViewById(R.id.spinner_grade);
         ImageButton btnRemove = view.findViewById(R.id.btn_remove);
 
-        // إعداد الـ Spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, grades);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGrade.setAdapter(adapter);
 
-        // برمجة زر الحذف
         btnRemove.setOnClickListener(v -> {
             layoutCourseList.removeView(view);
         });
 
-        // إضافة الصف للحاوية
         layoutCourseList.addView(view);
     }
 
@@ -67,7 +61,6 @@ public class GpaActivity extends AppCompatActivity {
         double totalPoints = 0.0;
         double totalCredits = 0.0;
 
-        // المرور على جميع الصفوف الموجودة في الـ Layout
         for (int i = 0; i < layoutCourseList.getChildCount(); i++) {
             View view = layoutCourseList.getChildAt(i);
 
@@ -90,7 +83,6 @@ public class GpaActivity extends AppCompatActivity {
             tvResult.setText(String.format("%.2f", gpa));
         } else {
             tvResult.setText("0.00");
-            // في دالة calculateGPA تحت خالص:
             Toast.makeText(this, getString(R.string.error_enter_credits), Toast.LENGTH_SHORT).show();
         }
     }

@@ -34,23 +34,19 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         Message message = messages.get(position);
         holder.tvMessage.setText(message.getText());
 
-        // تغيير الشكل حسب المرسل
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) holder.tvMessage.getLayoutParams();
         if (message.isSentByMe()) {
-            // رسالتي: محاذاة لليمين + لون بنفسجي
             params.gravity = Gravity.END;
-            holder.tvMessage.setBackgroundResource(R.drawable.bg_message_me); // هنعمله دلوقتي
-            holder.tvMessage.setTextColor(0xFFFFFFFF); // أبيض
+            holder.tvMessage.setBackgroundResource(R.drawable.bg_message_me);
+            holder.tvMessage.setTextColor(0xFFFFFFFF);
         } else {
-            // رسالة البوت: محاذاة لليسار + لون رمادي
             params.gravity = Gravity.START;
-            holder.tvMessage.setBackgroundResource(R.drawable.bg_message_bot); // هنعمله دلوقتي
-            holder.tvMessage.setTextColor(0xFF212121); // أسود
+            holder.tvMessage.setBackgroundResource(R.drawable.bg_message_bot);
+            holder.tvMessage.setTextColor(0xFF212121);
         }
         holder.tvMessage.setLayoutParams(params);
     }
 
-    // دالة لحذف آخر رسالة في القائمة (هنستخدمها عشان نمسح كلمة Typing)
     public void removeLastItem() {
         if (!messages.isEmpty()) {
             int position = messages.size() - 1;

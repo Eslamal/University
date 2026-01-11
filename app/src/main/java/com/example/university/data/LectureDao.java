@@ -4,7 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update; // ⚠️ تأكد من إضافة هذا السطر
+import androidx.room.Update;
 import java.util.List;
 
 @Dao
@@ -16,7 +16,6 @@ public interface LectureDao {
     @Delete
     void delete(Lecture lecture);
 
-    // دالة التعديل الجديدة
     @Update
     void update(Lecture lecture);
 

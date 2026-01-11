@@ -65,14 +65,12 @@ public class UnivAdapter extends RecyclerView.Adapter<UnivViewHolder> {
             holder.textView_province.setText("No web page available");
         }
 
-        // --- 1. برمجة زرار الموقع (Web) ---
         holder.button_web.setOnClickListener(view -> {
             if (!webUrl.isEmpty()) {
                 listener.OnClicked(webUrl);
             }
         });
 
-        // --- 2. برمجة زرار المشاركة (Share) ---
         holder.btn_share.setOnClickListener(v -> {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
@@ -81,25 +79,20 @@ public class UnivAdapter extends RecyclerView.Adapter<UnivViewHolder> {
             context.startActivity(Intent.createChooser(sendIntent, "Share via"));
         });
 
-        // --- 3. برمجة زرار الخريطة (Map) ---
         holder.btn_map.setOnClickListener(v -> {
-            // بنعمل Encode للاسم عشان لو فيه مسافات أو رموز خاصة
             Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(universityName));
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            mapIntent.setPackage("com.google.android.apps.maps"); // محاولة فتح خرائط جوجل
+            mapIntent.setPackage("com.google.android.apps.maps");
 
-            // التأكد من وجود تطبيق لفتح الخريطة
             if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
                 context.startActivity(mapIntent);
             } else {
-                // لو مفيش تطبيق خرائط، نفتح اللينك في المتصفح كبديل
                 Intent browserMapIntent = new Intent(Intent.ACTION_VIEW,
                         Uri.parse("https://www.google.com/maps/search/?api=1&query=" + Uri.encode(universityName)));
                 context.startActivity(browserMapIntent);
             }
         });
 
-        // --- 4. منطق المفضلة ---
         final boolean isFavorite = favoriteNames.contains(universityName.trim().toLowerCase());
 
         if (isFavorite) {

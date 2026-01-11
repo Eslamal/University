@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
     private ImageButton button_search, btnSettings;
     private EditText editText_name, editText_country;
     private ProgressBar progressBar;
-    private LottieAnimationView animationView; // تعريف Lottie
+    private LottieAnimationView animationView;
     private UnivViewModel univViewModel;
     private List<UniversityEntity> favoritesList = new ArrayList<>();
 
@@ -54,11 +54,9 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
         button_search = findViewById(R.id.button_search);
         progressBar = findViewById(R.id.loader);
 
-        // ربط العناصر الجديدة
         animationView = findViewById(R.id.animation_view);
         btnSettings = findViewById(R.id.btn_settings);
 
-        // برمجة زرار البحث
         button_search.setOnClickListener(view -> {
             String name = editText_name.getText().toString().trim();
             String country = editText_country.getText().toString().trim();
@@ -70,14 +68,13 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
             univViewModel.searchUniversities(name, country);
         });
 
-        // برمجة زرار المفضلة
+
         ImageButton buttonShowFavorites = findViewById(R.id.button_show_favorites);
         buttonShowFavorites.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, FavoritesActivity.class);
             startActivity(intent);
         });
 
-        // جوه دالة setupViews
         ImageButton btnScholarships = findViewById(R.id.btn_scholarships);
 
         btnScholarships.setOnClickListener(v -> {
@@ -85,8 +82,6 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
             startActivity(intent);
         });
 
-        // تعريف الزرار
-// (تأكد إنك ضفت زرار في activity_main.xml وسميته btn_schedule مثلاً)
         ImageButton btnSchedule = findViewById(R.id.btn_schedule);
 
         btnSchedule.setOnClickListener(v -> {
@@ -101,13 +96,11 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
             startActivity(intent);
         });
 
-        // برمجة زرار الإعدادات (Settings)
         btnSettings.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         });
-        // ضيف زرار جديد في الـ Layout وسميه btn_gpa
-        ImageButton btnGpa = findViewById(R.id.btn_gpa); // افترضنا انك ضفته
+        ImageButton btnGpa = findViewById(R.id.btn_gpa);
 
         btnGpa.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, GpaActivity.class);
@@ -121,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
     }
 
     private void observeViewModel() {
-        // مراقبة البيانات
         univViewModel.getUniversityList().observe(this, universities -> {
             if (universities != null && !universities.isEmpty()) {
                 showResult(universities);
@@ -130,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
             }
         });
 
-        // مراقبة التحميل
         univViewModel.getIsLoading().observe(this, isLoading -> {
             if (isLoading != null && isLoading) {
                 progressBar.setVisibility(View.VISIBLE);
@@ -143,17 +134,14 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
 
         univViewModel.getError().observe(this, errorMessage -> {
             if (errorMessage != null && !errorMessage.isEmpty()) {
-                // هذا السطر سيطبع الخطأ في الـ Logcat بالأسفل
                 Log.e("API_ERROR", "سبب المشكلة: " + errorMessage);
 
-                // إظهار رسالة توست للمستخدم مؤقتاً لنعرف السبب
                 Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
 
                 showEmptyState();
             }
         });
 
-        // مراقبة المفضلة لتحديث القلوب في الليستة
         univViewModel.getAllFavorites().observe(this, favorites -> {
             Log.d("FAVORITES_DEBUG", "Favorites list updated. Count: " + favorites.size());
             this.favoritesList = favorites;
@@ -164,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
     }
 
     private void showResult(List<APIResponse> responses) {
-        // إخفاء الأنيميشن وإظهار الليستة
         animationView.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
 
@@ -174,7 +161,6 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
     }
 
     private void showEmptyState() {
-        // إخفاء الليستة وإظهار الأنيميشن
         recyclerView.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
         animationView.setVisibility(View.VISIBLE);

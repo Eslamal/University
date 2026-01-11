@@ -51,7 +51,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         languageGroup.setOnCheckedChangeListener((group, checkedId) -> {
             String langCode = (checkedId == R.id.radio_ar) ? "ar" : "en";
-            // الطريقة الحديثة لتغيير اللغة بدون عمل Recreate يدوي
             AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(langCode));
         });
     }

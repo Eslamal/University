@@ -14,8 +14,6 @@ public class UniversityEntity {
     private String country;
     private String webPage;
 
-    // يجب إنشاء Constructor و Getters و Setters
-    // يمكنك إنشاؤها تلقائيًا في Android Studio بالضغط على Alt + Insert
 
     public UniversityEntity(@NonNull String name, String country, String webPage) {
         this.name = name;
