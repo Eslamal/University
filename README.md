@@ -1,70 +1,105 @@
 # 🎓 University App - Your Smart Academic Companion
 
-**University App** is a comprehensive Android application designed to assist students in their daily academic life. From finding the perfect university to managing lecture schedules and calculating GPA, this app integrates modern Android development practices to provide a seamless user experience.
+[![Available on Uptodown](https://img.shields.io/badge/Available_on-Uptodown-blue?style=for-the-badge&logo=uptodown)](https://en.uptodown.com/) <!-- ضيف لينك التطبيق بتاعك هنا بدل اللينك العام -->
+[![Android Version](https://img.shields.io/badge/Android-5.0+-brightgreen.svg?style=flat-square)](https://developer.android.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-The app leverages **Artificial Intelligence (Gemini)** to act as a personal academic advisor.
+**University App** is a comprehensive, native Android application meticulously designed to assist students in their daily academic life. From exploring global universities to managing weekly lecture schedules and calculating GPA, this app serves as an all-in-one student hub. It even features an integrated **Artificial Intelligence (Gemini)** assistant to act as a 24/7 personal academic advisor.
+
+---
+
+## 🎯 The Problem It Solves
+
+University students often struggle with disorganization, relying on multiple fragmented apps to manage their academic life. 
+* They use a browser to find scholarships and universities.
+* A notepad or gallery image to check their lecture schedule.
+* A separate calculator or website to compute their GPA.
+* Forums or search engines to seek academic advice.
+
+**The Solution:** This application aggregates all these essential tools into a single, cohesive, and user-friendly platform, saving time and boosting productivity.
 
 ---
 
 ## 📱 App Screenshots
 
+Here is a glimpse of the app's clean and modern UI, fully supporting both Light and Dark modes:
+
 | | | |
 |:---:|:---:|:---:|
-| ![Screen 1](universityApp/photo_2026-01-10_14-23-53.jpg) | ![Screen 2](universityApp/photo_2026-01-10_14-23-55.jpg) | ![Screen 3](universityApp/photo_2026-01-10_14-23-56.jpg) |
-| ![Screen 4](universityApp/photo_2026-01-10_14-23-57.jpg) | ![Screen 5](universityApp/photo_2026-01-10_14-23-58.jpg) | ![Screen 6](universityApp/photo_2026-01-10_14-23-59.jpg) |
-| ![Screen 7](universityApp/photo_2026-01-10_14-24-00.jpg) | ![Screen 8](universityApp/photo_2026-01-10_14-24-09.jpg) | ![Screen 9](universityApp/photo_2026-01-10_14-24-01.jpg) |
-| ![Screen 10](universityApp/photo_2026-01-10_14-24-02.jpg) | ![Screen 11](universityApp/photo_2026-01-10_14-24-03.jpg) | ![Screen 12](universityApp/photo_2026-01-10_14-24-04.jpg) |
-| ![Screen 13](universityApp/photo_2026-01-10_14-24-05.jpg) | ![Screen 14](universityApp/photo_2026-01-10_14-24-06.jpg) | ![Screen 15](universityApp/photo_2026-01-10_14-24-07.jpg) |
+| ![Screen 1](screens/1.jpg) | ![Screen 2](screens/2.jpg) | ![Screen 3](screens/3.jpg) |
+| ![Screen 4](screens/4.jpg) | ![Screen 5](screens/5.jpg) | ![Screen 6](screens/6.jpg) |
+| ![Screen 7](screens/7.jpg) | ![Screen 8](screens/8.jpg) | ![Screen 9](screens/9.jpg) |
+| ![Screen 10](screens/10.jpg) | ![Screen 11](screens/11.jpg) | |
 
 ---
 
 ## 🛠 Tech Stack & Architecture
 
-This project is built using **Native Android (Java)** following the **MVVM (Model-View-ViewModel)** architecture pattern to ensure separation of concerns and testability.
-
-### 🚀 Key Technologies Used
+This project is built using **Native Android (Java)** following the **MVVM (Model-View-ViewModel)** architecture pattern to ensure separation of concerns, scalability, and testability.
 
 | Technology | Where it is used? | Why it was used? |
 | :--- | :--- | :--- |
-| **Java** | Entire Application | The core language for Android development used in this project. |
-| **MVVM Architecture** | Project Structure | To separate UI logic from business logic, making the code cleaner and easier to maintain. |
-| **Room Database** | Lecture Schedule & Favorites | To cache data locally (offline support). Used for saving favorite universities and managing the student's weekly schedule efficiently. |
-| **Retrofit 2** | University Search | To handle API requests to *Hipolabs* for fetching university data. Chosen for its speed and type safety. |
-| **OkHttp 3** | AI Chat (Gemini) | Used to establish a connection with Google's **Gemini API** for the AI Advisor feature, handling timeouts and JSON bodies manually for flexibility. |
-| **Gemini AI API** | Chat Module | To provide intelligent, context-aware responses to student inquiries (e.g., "How to get a scholarship?"). |
-| **LiveData & ViewModel** | UI Updates | To observe data changes and update the UI automatically without memory leaks (Lifecycle-aware). |
-| **Lottie Animations** | Loading Screens | To provide a modern and engaging user experience during data fetching or empty states. |
-| **CardView & Recycler** | Lists Display | Used extensively to display lists of universities, chat messages, and schedule items in a material design layout. |
+| **Java** | Entire Application | The core language used for robust Android development. |
+| **MVVM Architecture** | Project Structure | To strictly separate UI components from business logic, making the codebase highly maintainable. |
+| **Room Database** | Schedule & Favorites | To cache data locally. It provides an abstraction layer over SQLite to allow fluent database access and offline functionality. |
+| **Retrofit 2** | University Search | To handle REST API requests efficiently. Chosen for its speed, type safety, and seamless JSON parsing. |
+| **OkHttp 3** | AI Chat Module | Used to manually handle HTTP requests, timeouts, and JSON bodies for communicating directly with the Gemini API. |
+| **Google Gemini API** | AI Advisor | To provide intelligent, context-aware, and conversational responses to student inquiries. |
+| **LiveData & ViewModel** | UI Updates | To observe data changes dynamically and update the UI without memory leaks (Lifecycle-aware). |
+| **Lottie Animations** | Loading & Empty States | To provide a modern, highly engaging user experience during data fetching or when lists are empty. |
+| **Material Design** | UI/UX | Extensive use of `CardView`, `RecyclerView`, and custom drawables for a modern, adaptive interface. |
 
 ---
 
-## 💡 How It Works (Modules)
+## 🚧 Challenges Faced & How We Solved Them
 
-### 1. 🔍 University Search
-* Users can search for universities by name or country.
-* Data is fetched in real-time using **Retrofit**.
-* Users can click on a card to visit the official website.
+Building a feature-rich application comes with its hurdles. Here are the major challenges overcome during development:
 
-### 2. 🤖 AI Advisor (Gemini Integration)
-* A chat interface allowing students to ask questions.
-* Powered by Google's **Gemini Flash Model**.
-* Features a "Typing..." indicator and robust error handling.
+### 1. 🌓 Seamless Dark/Light Mode Integration
+* **Challenge:** Hardcoded colors (`#FFFFFF`, `#000000`) caused UI elements to become invisible or visually jarring when switching between system themes.
+* **Solution:** Completely overhauled the XML layouts to use dynamic color references (`@color/main_background`, `@color/text_primary`, `@color/accent_color`). This ensured a 100% adaptive UI that looks native and elegant in both Dark and Light modes.
 
-### 3. 📅 Lecture Schedule (Offline)
-* A fully functional CRUD (Create, Read, Update, Delete) module.
-* Uses **Room Database** to save lectures permanently.
-* Users can add course name, time, professor, and room number.
+### 2. 🌍 Multi-Language Support (RTL & LTR)
+* **Challenge:** Supporting both Arabic (Right-to-Left) and English (Left-to-Right) without breaking the layout alignment.
+* **Solution:** Replaced all `layout_marginLeft` and `layout_marginRight` attributes with `marginStart` and `marginEnd`. Extracted all hardcoded text into localized `strings.xml` files, ensuring a flawless switch between languages.
 
-### 4. 🎓 Scholarships & GPA
-* **Scholarships:** A curated list of top global scholarships (Chevening, DAAD, etc.) with direct application links.
-* **GPA Calculator:** A tool to calculate semester GPA by inputting subject hours and grades.
+### 3. 🔒 API Key Security for Gemini
+* **Challenge:** Pushing the Google Gemini API key directly to GitHub exposes it to security risks and automatic revocation by Google.
+* **Solution:** Moved the API key to the `local.properties` file (which is git-ignored) and used the `Secrets Gradle Plugin` / `BuildConfig` to securely inject the key into the app at compile time.
+
+### 4. 📴 Offline Data Persistence
+* **Challenge:** Students need access to their lecture schedules even without internet access.
+* **Solution:** Implemented **Room Database** to save lectures and favorite universities locally on the device. This guarantees instant access to crucial data regardless of network connectivity.
+
+---
+
+## 💡 Core Features (Modules)
+
+### 1. 🔍 Global University Search
+* Live search functionality by university name or country via REST APIs.
+* Direct external links to official university websites.
+* Ability to save universities to a local "Favorites" list.
+
+### 2. 🤖 AI Academic Advisor (Powered by Gemini)
+* An interactive chat interface where students can seek advice on studying, scholarships, and career paths.
+* Modern chat bubble UI mimicking popular messaging apps.
+
+### 3. 📅 Offline Lecture Schedule
+* A complete CRUD module to manage weekly classes.
+* Add course name, time, professor, room number, and day.
+
+### 4. 🎓 Scholarships & GPA Calculator
+* **Scholarships Hub:** Browse fully funded global scholarships (e.g., Chevening) with one-click access to more details.
+* **Smart GPA Calculator:** Dynamically add courses, credits, and grades to accurately calculate the semester GPA.
 
 ---
 
 ## 👨‍💻 Developed By
 
-**[Eslam Ali]**
-* Android Developer
-* [eslameng776@gmail.com]
+**Eslam Ali**
+* 📱 Android Developer
+* 📧 Email: eslameng776@gmail.com
+* 🔗 GitHub: [Eslamal](https://github.com/Eslamal)
 
 ---
+*If you find this project useful, don't forget to give it a ⭐ on GitHub!*
