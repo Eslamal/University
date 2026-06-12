@@ -67,4 +67,26 @@
 
     <string name="news_title">Education News</string>
     <string name="read_more">Read More</string>
+
+    <string name="dashboard_desc">Your comprehensive guide to university life. Discover universities, manage your time, and consult AI easily.</string>
+    <string name="dash_search_title">University Search</string>
+    <string name="dash_search_desc">Find your favorite university worldwide and get all details.</string>
+    <string name="dash_ai_title">AI Advisor</string>
+    <string name="dash_ai_desc">Ask the smart assistant about scholarships and majors.</string>
+    <string name="dash_gpa_title">GPA Calculator</string>
+    <string name="dash_gpa_desc">A quick tool to calculate your GPA and track your progress.</string>
+    <string name="dash_schedule_title">Study Schedule</string>
+    <string name="dash_schedule_desc">Organize your weekly lectures and never miss a class.</string>
+    <string name="dash_news_title">Education News</string>
+    <string name="dash_news_desc">Follow the latest educational news and opportunities worldwide.</string>
+    <string name="dash_fav_title">Favorite Universities</string>
+    <string name="dash_fav_desc">Quick access to the list of universities you saved.</string>
+    <string name="dash_settings_title">Settings</string>
+    <string name="dash_settings_desc">Customize app language and theme (Dark Mode).</string>
+
+    <string name="lang_english">English 🇺🇸</string>
+    <string name="lang_arabic">العربية 🇪🇬</string>
+    <string name="lang_system">System Default</string>
+    <string name="dialog_oops">Oops!</string>
+    <string name="dialog_ok">Okay, Got it</string>
 </resources>

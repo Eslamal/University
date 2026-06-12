@@ -8,8 +8,8 @@
     <string name="menu_favorites">المفضلة</string>
 
     <string name="search_header_title">ابحث عن الجامعة التي تريدها</string>
-    <string name="hint_name">اسم الجامعة</string>
-    <string name="hint_country">الدولة</string>
+    <string name="hint_name">اسم الجامعة (بالإنجليزية)</string>
+    <string name="hint_country">الدولة (بالإنجليزية)</string>
     <string name="btn_search">بحث</string>
     <string name="no_data">لا توجد نتائج!</string>
     <string name="visit_website">زيارة الموقع</string>
@@ -66,4 +66,26 @@
 
     <string name="news_title">أخبار التعليم</string>
     <string name="read_more">اقرأ المزيد</string>
+
+    <string name="dashboard_desc">دليلك الشامل للحياة الجامعية. اكتشف الجامعات، نظم وقتك، وتواصل مع الذكاء الاصطناعي بكل سهولة.</string>
+    <string name="dash_search_title">بحث الجامعات</string>
+    <string name="dash_search_desc">ابحث عن جامعتك المفضلة حول العالم واعرف كافة التفاصيل.</string>
+    <string name="dash_ai_title">المستشار الذكي (AI)</string>
+    <string name="dash_ai_desc">اسأل المساعد الذكي عن المنح والتخصصات الجامعية.</string>
+    <string name="dash_gpa_title">حساب الـ GPA</string>
+    <string name="dash_gpa_desc">أداة سريعة لحساب معدلك التراكمي وتتبع مستواك الدراسي.</string>
+    <string name="dash_schedule_title">الجدول الدراسي</string>
+    <string name="dash_schedule_desc">نظم أوقات محاضراتك الأسبوعية ولا تفوت أي موعد.</string>
+    <string name="dash_news_title">أخبار التعليم</string>
+    <string name="dash_news_desc">تابع أحدث الأخبار والفرص التعليمية حول العالم.</string>
+    <string name="dash_fav_title">الجامعات المفضلة</string>
+    <string name="dash_fav_desc">الوصول السريع لقائمة الجامعات التي قمت بحفظها.</string>
+    <string name="dash_settings_title">الإعدادات</string>
+    <string name="dash_settings_desc">تخصيص لغة التطبيق والمظهر (الوضع الليلي).</string>
+
+    <string name="lang_english">English 🇺🇸</string>
+    <string name="lang_arabic">العربية 🇪🇬</string>
+    <string name="lang_system">لغة الجهاز</string>
+    <string name="dialog_oops">عفواً!</string>
+    <string name="dialog_ok">حسناً، فهمت</string>
 </resources>

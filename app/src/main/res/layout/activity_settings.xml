@@ -46,7 +46,10 @@
             android:orientation="vertical"
             android:padding="24dp">
 
+            <!-- قسم اللغة -->
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/language_label"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -54,56 +57,65 @@
                 android:layout_marginBottom="16dp"
                 android:drawablePadding="8dp"
                 app:drawableStartCompat="@android:drawable/ic_menu_sort_by_size"
-                android:drawableTint="@color/purple_500"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                app:drawableTint="@color/purple_500"/>
 
             <RadioGroup
                 android:id="@+id/language_group"
-                android:orientation="horizontal"
-                android:layout_marginBottom="32dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp">
 
                 <RadioButton
                     android:id="@+id/radio_en"
-                    android:text="English 🇺🇸"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lang_english"
                     android:textColor="@color/text_primary"
                     android:background="@drawable/bg_radio_selector"
                     android:button="@null"
-                    android:textAlignment="center"
                     android:padding="16dp"
+                    android:layout_marginBottom="12dp"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"/>
+                    android:textStyle="bold"/>
 
                 <RadioButton
                     android:id="@+id/radio_ar"
-                    android:text="العربية 🇪🇬"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lang_arabic"
                     android:textColor="@color/text_primary"
                     android:background="@drawable/bg_radio_selector"
                     android:button="@null"
-                    android:textAlignment="center"
+                    android:padding="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <!-- خيار لغة الجهاز -->
+                <RadioButton
+                    android:id="@+id/radio_system_lang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lang_system"
+                    android:textColor="@color/text_primary"
+                    android:background="@drawable/bg_radio_selector"
+                    android:button="@null"
                     android:padding="16dp"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"/>
+                    android:textStyle="bold"/>
             </RadioGroup>
 
             <View
-                android:background="#E0E0E0"
-                android:layout_height="1dp"
                 android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="32dp"/>
 
+            <!-- قسم المظهر -->
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/theme_label"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -111,9 +123,7 @@
                 android:layout_marginBottom="16dp"
                 android:drawablePadding="8dp"
                 app:drawableStartCompat="@android:drawable/ic_menu_view"
-                android:drawableTint="@color/purple_500"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                app:drawableTint="@color/purple_500"/>
 
             <RadioGroup
                 android:id="@+id/theme_group"
@@ -122,6 +132,8 @@
 
                 <RadioButton
                     android:id="@+id/radio_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="@string/light_mode"
                     android:textColor="@color/text_primary"
                     android:background="@drawable/bg_radio_selector"
@@ -130,12 +142,12 @@
                     android:drawableTint="#FDB813"
                     android:drawablePadding="16dp"
                     android:padding="16dp"
-                    android:layout_marginBottom="12dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_marginBottom="12dp"/>
 
                 <RadioButton
                     android:id="@+id/radio_dark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="@string/dark_mode"
                     android:textColor="@color/text_primary"
                     android:background="@drawable/bg_radio_selector"
@@ -144,12 +156,12 @@
                     android:drawableTint="#5E35B1"
                     android:drawablePadding="16dp"
                     android:padding="16dp"
-                    android:layout_marginBottom="12dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_marginBottom="12dp"/>
 
                 <RadioButton
                     android:id="@+id/radio_system"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="@string/system_default"
                     android:textColor="@color/text_primary"
                     android:background="@drawable/bg_radio_selector"
@@ -157,9 +169,7 @@
                     android:drawableStart="@android:drawable/ic_menu_manage"
                     android:drawableTint="@color/text_secondary"
                     android:drawablePadding="16dp"
-                    android:padding="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:padding="16dp"/>
             </RadioGroup>
 
         </LinearLayout>

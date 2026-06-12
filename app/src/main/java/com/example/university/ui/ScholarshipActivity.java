@@ -50,20 +50,37 @@ public class ScholarshipActivity extends AppCompatActivity {
     }
 
     private void fetchRealScholarships() {
-        RetrofitClient.getService().getRealScholarships().enqueue(new Callback<ScholarshipResponse>() {
+        // 1. نجيب لغة الموبايل الحالية
+        String lang = java.util.Locale.getDefault().getLanguage();
+        String rssUrl;
+
+        // 2. نحدد رابط الأخبار حسب اللغة
+        if (lang.equals("ar")) {
+            // لو الموبايل عربي -> هنجيب أخبار BBC عربي
+            rssUrl = "http://feeds.bbci.co.uk/arabic/rss.xml";
+        } else {
+            // لو الموبايل إنجليزي -> هنجيب أخبار BBC تعليم الإنجليزية
+            rssUrl = "http://feeds.bbci.co.uk/news/education/rss.xml";
+        }
+
+        // 3. نركب الرابط على خدمة التحويل لـ JSON
+        String apiUrl = "https://api.rss2json.com/v1/api.json?rss_url=" + rssUrl;
+
+        // 4. نبعت الطلب
+        RetrofitClient.getService().getRealScholarships(apiUrl).enqueue(new Callback<ScholarshipResponse>() {
             @Override
             public void onResponse(Call<ScholarshipResponse> call, Response<ScholarshipResponse> response) {
                 try {
                     if (response.isSuccessful() && response.body() != null && response.body().getItems() != null) {
                         List<ScholarshipItem> apiItems = response.body().getItems();
                         List<Scholarship> list = new ArrayList<>();
-                        Random random = new Random();
+                        java.util.Random random = new java.util.Random();
 
                         for (ScholarshipItem item : apiItems) {
                             int randomColor = colors[random.nextInt(colors.length)];
                             list.add(new Scholarship(
                                     item.getTitle(),
-                                    "International",
+                                    lang.equals("ar") ? "أخبار" : "News", // تتغير حسب اللغة
                                     item.getDescription(),
                                     item.getLink(),
                                     randomColor
@@ -78,14 +95,13 @@ public class ScholarshipActivity extends AppCompatActivity {
                     } else {
                     }
                 } catch (Exception e) {
-                    // 🚨 لو حصل أي خطأ في قراءة البيانات، نشغل الداتا البديلة فوراً
                     Log.e("API_ERROR", "Parsing error: " + e.getMessage());
                 }
             }
 
             @Override
             public void onFailure(Call<ScholarshipResponse> call, Throwable t) {
-                Toast.makeText(ScholarshipActivity.this, "Showing offline data.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScholarshipActivity.this, lang.equals("ar") ? "يتم عرض الأخبار المحفوظة" : "Showing offline data.", Toast.LENGTH_SHORT).show();
             }
         });
     }

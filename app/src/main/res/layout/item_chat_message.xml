@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_bubble_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="6dp">
 
     <TextView
         android:id="@+id/tv_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="12dp"
-        tools:text="Hello! How can I help?"
-        android:textSize="16sp"
-        android:textColor="@color/white"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
         android:maxWidth="280dp"
-        android:background="@drawable/rounded_bg"/>
+        android:textSize="15sp"
+        android:textColor="@color/text_primary"
+        android:lineSpacingExtra="4dp"
+        android:background="@drawable/rounded_bg"
+        android:backgroundTint="@color/card_background"
+        android:elevation="2dp"
+        tools:text="مرحباً! كيف يمكنني مساعدتك في رحلتك الجامعية اليوم؟" />
 
 </LinearLayout>

@@ -1,182 +1,50 @@
 package com.example.university.ui;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.PopupMenu; // مهمة جداً
-import android.widget.ProgressBar;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.airbnb.lottie.LottieAnimationView;
 import com.example.university.R;
-import com.example.university.utils.WebClickListener;
-import com.example.university.data.UniversityEntity;
-import com.example.university.data.APIResponse;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements WebClickListener {
-
-    private RecyclerView recyclerView;
-    private UnivAdapter adapter;
-    private ImageButton button_search;
-    private EditText editText_name, editText_country;
-    private ProgressBar progressBar;
-    private LottieAnimationView animationView;
-    private UnivViewModel univViewModel;
-    private List<UniversityEntity> favoritesList = new ArrayList<>();
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
-        univViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(UnivViewModel.class);
-
-        setupViews();
-        setupRecyclerView();
-        observeViewModel();
-    }
-
-    private void setupViews() {
-        recyclerView = findViewById(R.id.recycler_list);
-        editText_name = findViewById(R.id.editText_name);
-        editText_country = findViewById(R.id.editText_country);
-        button_search = findViewById(R.id.button_search);
-        progressBar = findViewById(R.id.loader);
-        animationView = findViewById(R.id.animation_view);
-
-        // --- زرار البحث ---
-        button_search.setOnClickListener(view -> {
-            String name = editText_name.getText().toString().trim();
-            String country = editText_country.getText().toString().trim();
-
-            if (name.isEmpty() && country.isEmpty()) {
-                Toast.makeText(MainActivity.this, getString(R.string.no_data), Toast.LENGTH_LONG).show();
-                return;
-            }
-            univViewModel.searchUniversities(name, country);
+        // 1. فتح صفحة البحث عن الجامعات
+        findViewById(R.id.card_search).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, SearchActivity.class));
         });
 
-        // --- زرار المفضلة ---
-        ImageButton buttonShowFavorites = findViewById(R.id.button_show_favorites);
-        buttonShowFavorites.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, FavoritesActivity.class);
-            startActivity(intent);
+        // 2. فتح صفحة المستشار الذكي
+        findViewById(R.id.card_ai).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ChatActivity.class));
         });
 
-        // --- برمجة القائمة المنسدلة (Popup Menu) ---
-        ImageButton btnMenu = findViewById(R.id.btn_menu);
-        btnMenu.setOnClickListener(v -> {
-            PopupMenu popup = new PopupMenu(MainActivity.this, btnMenu);
-            popup.getMenuInflater().inflate(R.menu.drawer_menu, popup.getMenu());
-
-            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    int id = item.getItemId();
-
-                    if (id == R.id.nav_favorites) {
-                        startActivity(new Intent(MainActivity.this, FavoritesActivity.class));
-                        return true;
-                    } else if (id == R.id.nav_ai_chat) {
-                        startActivity(new Intent(MainActivity.this, ChatActivity.class));
-                        return true;
-                    } else if (id == R.id.nav_gpa) {
-                        startActivity(new Intent(MainActivity.this, GpaActivity.class));
-                        return true;
-                    } else if (id == R.id.nav_scholarships) {
-                        startActivity(new Intent(MainActivity.this, ScholarshipActivity.class));
-                        return true;
-                    } else if (id == R.id.nav_schedule) {
-                        startActivity(new Intent(MainActivity.this, ScheduleActivity.class));
-                        return true;
-                    } else if (id == R.id.nav_settings) {
-                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-                        return true;
-                    }
-                    return false;
-                }
-            });
-            popup.show();
-        });
-    }
-
-    private void setupRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
-    }
-
-    private void observeViewModel() {
-        univViewModel.getUniversityList().observe(this, universities -> {
-            if (universities != null && !universities.isEmpty()) {
-                showResult(universities);
-            } else {
-                showEmptyState();
-            }
+        // 3. فتح صفحة حساب المعدل
+        findViewById(R.id.card_gpa).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, GpaActivity.class));
         });
 
-        univViewModel.getIsLoading().observe(this, isLoading -> {
-            if (isLoading != null && isLoading) {
-                progressBar.setVisibility(View.VISIBLE);
-                recyclerView.setVisibility(View.GONE);
-                animationView.setVisibility(View.GONE);
-            } else {
-                progressBar.setVisibility(View.GONE);
-            }
+        // 4. فتح صفحة الجدول الدراسي
+        findViewById(R.id.card_schedule).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ScheduleActivity.class));
         });
 
-        univViewModel.getError().observe(this, errorMessage -> {
-            if (errorMessage != null && !errorMessage.isEmpty()) {
-                Log.e("API_ERROR", "سبب المشكلة: " + errorMessage);
-                Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
-                showEmptyState();
-            }
+        // 5. فتح صفحة أخبار التعليم
+        findViewById(R.id.card_news).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ScholarshipActivity.class));
         });
 
-        univViewModel.getAllFavorites().observe(this, favorites -> {
-            this.favoritesList = favorites;
-            if (adapter != null) {
-                adapter.setFavorites(favorites);
-            }
+        // 6. فتح صفحة المفضلة
+        findViewById(R.id.card_favorites).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, FavoritesActivity.class));
         });
-    }
 
-    private void showResult(List<APIResponse> responses) {
-        animationView.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
-
-        adapter = new UnivAdapter(this, responses, this, univViewModel);
-        adapter.setFavorites(favoritesList);
-        recyclerView.setAdapter(adapter);
-    }
-
-    private void showEmptyState() {
-        recyclerView.setVisibility(View.GONE);
-        progressBar.setVisibility(View.GONE);
-        animationView.setVisibility(View.VISIBLE);
-        animationView.playAnimation();
-    }
-
-    @Override
-    public void OnClicked(String web) {
-        if (web != null && !web.isEmpty()) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(web));
-            startActivity(browserIntent);
-        } else {
-            Toast.makeText(this, "Invalid web page URL", Toast.LENGTH_SHORT).show();
-        }
+        // 7. فتح صفحة الإعدادات
+        findViewById(R.id.card_settings).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+        });
     }
 }

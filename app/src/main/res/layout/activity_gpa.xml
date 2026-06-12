@@ -6,6 +6,7 @@
     android:background="@color/main_background"
     android:orientation="vertical">
 
+    <!-- شريط العنوان البارز -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -13,7 +14,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
-        android:elevation="4dp">
+        android:elevation="8dp">
 
         <ImageButton
             android:id="@+id/btn_back"
@@ -41,11 +42,12 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- كارت عرض النتيجة -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/purple_700"
-            app:cardCornerRadius="16dp"
+            app:cardCornerRadius="20dp"
             app:cardElevation="8dp"
             android:layout_marginBottom="16dp">
 
@@ -74,10 +76,13 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- منطقة المواد الدراسية -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingBottom="8dp">
 
             <LinearLayout
                 android:id="@+id/layout_course_list"
@@ -87,11 +92,12 @@
             </LinearLayout>
         </ScrollView>
 
+        <!-- أزرار التحكم -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="8dp">
 
             <Button
                 android:id="@+id/btn_add_course"
@@ -99,10 +105,10 @@
                 android:layout_weight="1"
                 android:layout_height="60dp"
                 android:text="@string/btn_add_subject"
-                android:textColor="@color/purple_700"
+                android:textColor="@color/accent_color"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="@color/purple_700"
-                app:cornerRadius="12dp"
+                app:strokeColor="@color/accent_color"
+                app:cornerRadius="16dp"
                 android:layout_marginEnd="8dp"/>
 
             <Button
@@ -112,8 +118,8 @@
                 android:layout_height="60dp"
                 android:text="@string/btn_calculate"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/purple_700"
-                app:cornerRadius="12dp"
+                android:backgroundTint="@color/accent_color"
+                app:cornerRadius="16dp"
                 android:layout_marginStart="8dp"/>
         </LinearLayout>
     </LinearLayout>

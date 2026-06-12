@@ -22,6 +22,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import com.example.university.BuildConfig;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -30,12 +31,8 @@ public class ChatActivity extends AppCompatActivity {
     private EditText etMessage;
     private ImageButton btnSend;
 
-    // ⚠️ تأكد إن المفتاح ده بتاعك ومفيش أي مسافات قبله أو بعده
-    private static final String API_KEY = "AQ.Ab8RN6JRKkmNMyld71SUTjMZpBvrifwtg2bOWW4KLTGoNmnBKg";
+    private static final String API_KEY = BuildConfig.API_KEY;
 
-    // 💡 هنستخدم gemini-pro لأنه الأكثر استقراراً ومدعوم في كل الحسابات
-// الرابط الأحدث والأسرع (Gemini 1.5 Flash)
-// الرابط الصحيح للإصدار الحديث اللي شغال حالياً
     private static final String URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + API_KEY;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +126,6 @@ public class ChatActivity extends AppCompatActivity {
                         });
                     }
                 } else {
-                    // 🚨 التعديل السحري هنا: هنقرأ رسالة الخطأ من جوجل ونعرضها
                     String errorDetails = response.body() != null ? response.body().string() : "No details";
                     runOnUiThread(() -> {
                         if (adapter != null) adapter.removeLastItem();

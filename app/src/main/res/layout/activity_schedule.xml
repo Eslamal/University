@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/main_background">
 
+    <!-- شريط العنوان البارز -->
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -15,7 +16,7 @@
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
         android:paddingVertical="12dp"
-        android:elevation="4dp">
+        android:elevation="8dp">
 
         <ImageButton
             android:id="@+id/btn_back"
@@ -45,11 +46,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sched_subtitle"
-                android:textColor="#E1BEE7"
+                android:textColor="#B3FFFFFF"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 
+    <!-- حالة الجدول فارغ (Empty State) -->
     <LinearLayout
         android:id="@+id/layout_empty_state"
         android:layout_width="match_parent"
@@ -59,30 +61,34 @@
         android:orientation="vertical"
         android:visibility="gone">
 
+        <!-- الأيقونة -->
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_schedule"
-            app:tint="@color/gray" />
+            app:tint="@color/text_secondary" />
 
+        <!-- العنوان -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/empty_schedule_title"
-            android:textColor="@color/gray"
+            android:textColor="@color/text_primary"
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <!-- الوصف -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/empty_schedule_desc"
-            android:textColor="#9E9E9E"
+            android:textColor="@color/text_secondary"
             android:textSize="14sp" />
     </LinearLayout>
 
+    <!-- قائمة المحاضرات -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_schedule"
         android:layout_width="match_parent"
@@ -91,6 +97,7 @@
         android:padding="8dp"
         android:clipToPadding="false"/>
 
+    <!-- زرار الإضافة العائم (FAB) -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_lecture"
         android:layout_width="wrap_content"
@@ -98,7 +105,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="24dp"
-        android:backgroundTint="@color/teal_200"
+        app:backgroundTint="@color/accent_color"
         android:src="@android:drawable/ic_input_add"
         app:tint="@color/white"
         android:contentDescription="@string/fab_add_desc"/>

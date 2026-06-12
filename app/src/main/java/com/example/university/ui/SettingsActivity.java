@@ -3,9 +3,11 @@ package com.example.university.ui;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.RadioGroup;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.os.LocaleListCompat;
+
 import com.example.university.R;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -47,13 +49,30 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void setupLanguageSelection() {
+        // قراءة اللغة المحفوظة (إذا كانت غير موجودة، يعني مختار لغة الجهاز)
         String currentLang = AppCompatDelegate.getApplicationLocales().toLanguageTags();
-        if (currentLang.contains("ar")) languageGroup.check(R.id.radio_ar);
-        else languageGroup.check(R.id.radio_en);
+
+        if (currentLang.equals("ar")) {
+            languageGroup.check(R.id.radio_ar);
+        } else if (currentLang.equals("en")) {
+            languageGroup.check(R.id.radio_en);
+        } else {
+            languageGroup.check(R.id.radio_system_lang); // لغة الجهاز الافتراضية
+        }
 
         languageGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            String langCode = (checkedId == R.id.radio_ar) ? "ar" : "en";
-            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(langCode));
+            LocaleListCompat locales;
+
+            if (checkedId == R.id.radio_ar) {
+                locales = LocaleListCompat.forLanguageTags("ar");
+            } else if (checkedId == R.id.radio_en) {
+                locales = LocaleListCompat.forLanguageTags("en");
+            } else {
+                // ده الكود السحري اللي بيرجع التطبيق يقرا من لغة الموبايل الأساسية
+                locales = LocaleListCompat.getEmptyLocaleList();
+            }
+
+            AppCompatDelegate.setApplicationLocales(locales);
         });
     }
 }
