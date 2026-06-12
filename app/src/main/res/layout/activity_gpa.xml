@@ -6,7 +6,6 @@
     android:background="@color/main_background"
     android:orientation="vertical">
 
-    <!-- شريط العنوان البارز -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -42,7 +41,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- كارت عرض النتيجة -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,7 +74,6 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- منطقة المواد الدراسية -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -92,7 +89,6 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- أزرار التحكم -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

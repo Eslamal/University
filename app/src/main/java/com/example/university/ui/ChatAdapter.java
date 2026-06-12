@@ -34,26 +34,21 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         Message message = messages.get(position);
         holder.tvMessage.setText(message.getText());
 
-        // الوصول للـ Context عشان نجيب الألوان
         android.content.Context context = holder.itemView.getContext();
 
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) holder.tvMessage.getLayoutParams();
 
         if (message.isSentByMe()) {
             params.gravity = Gravity.END;
-            // لون رسالة المستخدم (بنفسجي فاتح/غامق حسب الثيم)
             holder.tvMessage.setBackgroundResource(R.drawable.bg_message_me);
             holder.tvMessage.setBackgroundTintList(android.content.res.ColorStateList.valueOf(
                     context.getResources().getColor(R.color.accent_color)));
-            // لون النص (دائماً أبيض في رسالة المستخدم)
             holder.tvMessage.setTextColor(context.getResources().getColor(R.color.white));
         } else {
             params.gravity = Gravity.START;
-            // لون رسالة الـ AI (يتغير مع الدارك مود لو استخدمت @color/card_background)
             holder.tvMessage.setBackgroundResource(R.drawable.bg_message_bot);
             holder.tvMessage.setBackgroundTintList(android.content.res.ColorStateList.valueOf(
                     context.getResources().getColor(R.color.card_background)));
-            // لون النص (يأخذ لون النص الأساسي عشان يتغير في الدارك مود)
             holder.tvMessage.setTextColor(context.getResources().getColor(R.color.text_primary));
         }
         holder.tvMessage.setLayoutParams(params);

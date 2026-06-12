@@ -38,7 +38,7 @@ public class SearchActivity extends AppCompatActivity implements WebClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search); // ربطناه بالتصميم الجديد
+        setContentView(R.layout.activity_search);
 
         univViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(UnivViewModel.class);
 
@@ -55,10 +55,8 @@ public class SearchActivity extends AppCompatActivity implements WebClickListene
         progressBar = findViewById(R.id.loader);
         animationView = findViewById(R.id.animation_view);
 
-        // --- تشغيل زرار الرجوع ---
         findViewById(R.id.btn_back).setOnClickListener(v -> finish());
 
-        // --- زرار البحث ---
         button_search.setOnClickListener(view -> {
             String name = editText_name.getText().toString().trim();
             String country = editText_country.getText().toString().trim();
@@ -70,7 +68,6 @@ public class SearchActivity extends AppCompatActivity implements WebClickListene
             univViewModel.searchUniversities(name, country);
         });
 
-        // --- زرار المفضلة ---
         ImageButton buttonShowFavorites = findViewById(R.id.button_show_favorites);
         buttonShowFavorites.setOnClickListener(v -> {
             Intent intent = new Intent(SearchActivity.this, FavoritesActivity.class);

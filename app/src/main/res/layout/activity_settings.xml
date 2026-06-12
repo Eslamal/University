@@ -46,7 +46,6 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- قسم اللغة -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,7 +90,6 @@
                     android:textSize="16sp"
                     android:textStyle="bold"/>
 
-                <!-- خيار لغة الجهاز -->
                 <RadioButton
                     android:id="@+id/radio_system_lang"
                     android:layout_width="match_parent"
@@ -112,7 +110,6 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="32dp"/>
 
-            <!-- قسم المظهر -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

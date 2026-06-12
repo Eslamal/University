@@ -49,7 +49,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void setupLanguageSelection() {
-        // قراءة اللغة المحفوظة (إذا كانت غير موجودة، يعني مختار لغة الجهاز)
         String currentLang = AppCompatDelegate.getApplicationLocales().toLanguageTags();
 
         if (currentLang.equals("ar")) {
@@ -57,7 +56,7 @@ public class SettingsActivity extends AppCompatActivity {
         } else if (currentLang.equals("en")) {
             languageGroup.check(R.id.radio_en);
         } else {
-            languageGroup.check(R.id.radio_system_lang); // لغة الجهاز الافتراضية
+            languageGroup.check(R.id.radio_system_lang);
         }
 
         languageGroup.setOnCheckedChangeListener((group, checkedId) -> {
@@ -68,7 +67,6 @@ public class SettingsActivity extends AppCompatActivity {
             } else if (checkedId == R.id.radio_en) {
                 locales = LocaleListCompat.forLanguageTags("en");
             } else {
-                // ده الكود السحري اللي بيرجع التطبيق يقرا من لغة الموبايل الأساسية
                 locales = LocaleListCompat.getEmptyLocaleList();
             }
 

@@ -26,7 +26,6 @@ public class ScholarshipActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ScholarshipAdapter adapter;
 
-    // مصفوفة ألوان عشان الكروت تطلع شيك
     private final int[] colors = {
             R.color.purple_700,
             R.color.teal_700,
@@ -50,23 +49,17 @@ public class ScholarshipActivity extends AppCompatActivity {
     }
 
     private void fetchRealScholarships() {
-        // 1. نجيب لغة الموبايل الحالية
         String lang = java.util.Locale.getDefault().getLanguage();
         String rssUrl;
 
-        // 2. نحدد رابط الأخبار حسب اللغة
         if (lang.equals("ar")) {
-            // لو الموبايل عربي -> هنجيب أخبار BBC عربي
             rssUrl = "http://feeds.bbci.co.uk/arabic/rss.xml";
         } else {
-            // لو الموبايل إنجليزي -> هنجيب أخبار BBC تعليم الإنجليزية
             rssUrl = "http://feeds.bbci.co.uk/news/education/rss.xml";
         }
 
-        // 3. نركب الرابط على خدمة التحويل لـ JSON
         String apiUrl = "https://api.rss2json.com/v1/api.json?rss_url=" + rssUrl;
 
-        // 4. نبعت الطلب
         RetrofitClient.getService().getRealScholarships(apiUrl).enqueue(new Callback<ScholarshipResponse>() {
             @Override
             public void onResponse(Call<ScholarshipResponse> call, Response<ScholarshipResponse> response) {
@@ -80,7 +73,7 @@ public class ScholarshipActivity extends AppCompatActivity {
                             int randomColor = colors[random.nextInt(colors.length)];
                             list.add(new Scholarship(
                                     item.getTitle(),
-                                    lang.equals("ar") ? "أخبار" : "News", // تتغير حسب اللغة
+                                    lang.equals("ar") ? "أخبار" : "News",
                                     item.getDescription(),
                                     item.getLink(),
                                     randomColor

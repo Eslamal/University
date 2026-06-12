@@ -32,7 +32,6 @@ public class ScheduleActivity extends AppCompatActivity {
     private AppDatabase database;
     private List<Lecture> lectureList = new ArrayList<>();
 
-    // تعريف المتغير بتاع الشاشة الفاضية
     private LinearLayout layoutEmptyState;
 
     @Override
@@ -44,7 +43,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
         database = AppDatabase.getDatabase(this);
         recyclerView = findViewById(R.id.recycler_schedule);
-        layoutEmptyState = findViewById(R.id.layout_empty_state); // ربط التصميم
+        layoutEmptyState = findViewById(R.id.layout_empty_state);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -57,7 +56,6 @@ public class ScheduleActivity extends AppCompatActivity {
     private void loadLectures() {
         lectureList = database.lectureDao().getAllLectures();
 
-        // 💡 فحص: هل الجدول فاضي؟
         if (lectureList.isEmpty()) {
             layoutEmptyState.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);

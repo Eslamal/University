@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/main_background">
 
-    <!-- شريط العنوان البارز -->
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -51,7 +50,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- حالة الجدول فارغ (Empty State) -->
     <LinearLayout
         android:id="@+id/layout_empty_state"
         android:layout_width="match_parent"
@@ -61,14 +59,12 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <!-- الأيقونة -->
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_schedule"
             app:tint="@color/text_secondary" />
 
-        <!-- العنوان -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,7 +74,6 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <!-- الوصف -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,7 +83,6 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-    <!-- قائمة المحاضرات -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_schedule"
         android:layout_width="match_parent"
@@ -97,7 +91,6 @@
         android:padding="8dp"
         android:clipToPadding="false"/>
 
-    <!-- زرار الإضافة العائم (FAB) -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_lecture"
         android:layout_width="wrap_content"

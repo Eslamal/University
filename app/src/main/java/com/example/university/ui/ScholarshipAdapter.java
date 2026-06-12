@@ -40,14 +40,12 @@ public class ScholarshipAdapter extends RecyclerView.Adapter<ScholarshipAdapter.
         holder.tvCountry.setText(item.getCountry());
         holder.tvDesc.setText(item.getDescription());
 
-        // 💡 حماية أول حرف من الكراش
         if (!name.isEmpty()) {
             holder.tvLetter.setText(String.valueOf(name.charAt(0)));
         } else {
             holder.tvLetter.setText("S");
         }
 
-        // 💡 حماية الألوان (الطريقة الأحدث والأكثر أماناً)
         try {
             holder.layoutHeader.setBackgroundColor(androidx.core.content.ContextCompat.getColor(context, item.getColorRes()));
         } catch (Exception e) {
@@ -59,7 +57,6 @@ public class ScholarshipAdapter extends RecyclerView.Adapter<ScholarshipAdapter.
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getLink()));
                 context.startActivity(browserIntent);
             } catch (Exception e) {
-                // منع الكراش لو الرابط بايظ
             }
         });
     }

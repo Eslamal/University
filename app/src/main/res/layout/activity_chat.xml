@@ -6,7 +6,6 @@
     android:background="@color/main_background"
     android:orientation="vertical">
 
-    <!-- شريط العنوان (Toolbar) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -36,7 +35,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- منطقة الرسائل -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_chat"
         android:layout_width="match_parent"
@@ -45,7 +43,6 @@
         android:padding="8dp"
         android:clipToPadding="false" />
 
-    <!-- شريط الإدخال السفلي البارز -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

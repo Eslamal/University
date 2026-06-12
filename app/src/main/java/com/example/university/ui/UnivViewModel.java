@@ -48,8 +48,6 @@ public class UnivViewModel extends AndroidViewModel {
 
             @Override
             public void onError(String message) {
-                // تم إزالة البيانات الوهمية (Fake Data)
-                // الآن سيعرض رسالة خطأ حقيقية إذا فشل الاتصال بالإنترنت
                 error.postValue("Error: " + message);
                 isLoading.postValue(false);
             }

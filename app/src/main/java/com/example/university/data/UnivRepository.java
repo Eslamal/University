@@ -30,7 +30,6 @@ public class UnivRepository {
         String queryName = (name != null && !name.trim().isEmpty()) ? name.toLowerCase() : null;
         String queryCountry = (country != null && !country.trim().isEmpty()) ? country.toLowerCase() : null;
 
-        // 💡 بنكلم جيت هب نجيب كل الجامعات
         apiService.getAllUniversities().enqueue(new Callback<List<APIResponse>>() {
             @Override
             public void onResponse(Call<List<APIResponse>> call, Response<List<APIResponse>> response) {
@@ -38,7 +37,6 @@ public class UnivRepository {
                     List<APIResponse> allUniversities = response.body();
                     List<APIResponse> filteredList = new ArrayList<>();
 
-                    // 💡 الفلترة محلياً (Local In-Memory Filtering)
                     for (APIResponse univ : allUniversities) {
                         boolean matchesName = true;
                         boolean matchesCountry = true;
