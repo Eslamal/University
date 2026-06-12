@@ -1,36 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_background"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/purple_700"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:elevation="4dp">
 
         <ImageButton
             android:id="@+id/btn_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_arrow_back"
-            android:contentDescription="Back"/>
+            android:src="@drawable/ic_back"
+            app:tint="@color/white"
+            android:contentDescription="Back" />
 
         <TextView
+            android:id="@+id/tv_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Scholarships"
+            android:layout_marginStart="16dp"
+            android:text="@string/news_title"
+            android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"/>
-    </RelativeLayout>
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_scholarships"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:padding="8dp"/>
 </LinearLayout>

@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData;
 import com.example.university.network.RetrofitClient;
 import com.example.university.network.UniversityApiService;
 import com.example.university.utils.OnFetchDataListener;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import retrofit2.Call;
@@ -25,14 +27,35 @@ public class UnivRepository {
     }
 
     public void searchUniversities(OnFetchDataListener listener, String name, String country) {
-        String queryName = (name != null && !name.trim().isEmpty()) ? name : null;
-        String queryCountry = (country != null && !country.trim().isEmpty()) ? country : null;
+        String queryName = (name != null && !name.trim().isEmpty()) ? name.toLowerCase() : null;
+        String queryCountry = (country != null && !country.trim().isEmpty()) ? country.toLowerCase() : null;
 
-        apiService.searchUniversities(queryName, queryCountry).enqueue(new Callback<List<APIResponse>>() {
+        // 💡 بنكلم جيت هب نجيب كل الجامعات
+        apiService.getAllUniversities().enqueue(new Callback<List<APIResponse>>() {
             @Override
             public void onResponse(Call<List<APIResponse>> call, Response<List<APIResponse>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    listener.onResponse(response.body(), response.message());
+                    List<APIResponse> allUniversities = response.body();
+                    List<APIResponse> filteredList = new ArrayList<>();
+
+                    // 💡 الفلترة محلياً (Local In-Memory Filtering)
+                    for (APIResponse univ : allUniversities) {
+                        boolean matchesName = true;
+                        boolean matchesCountry = true;
+
+                        if (queryName != null && univ.getName() != null) {
+                            matchesName = univ.getName().toLowerCase().contains(queryName);
+                        }
+                        if (queryCountry != null && univ.getCountry() != null) {
+                            matchesCountry = univ.getCountry().toLowerCase().contains(queryCountry);
+                        }
+
+                        if (matchesName && matchesCountry) {
+                            filteredList.add(univ);
+                        }
+                    }
+
+                    listener.onResponse(filteredList, "Success");
                 } else {
                     listener.onError("Error Code: " + response.code());
                 }

@@ -15,11 +15,23 @@ public class ScholarshipItem {
     @SerializedName("description")
     private String description;
 
-    public String getTitle() { return title; }
-    public String getPubDate() { return pubDate; }
-    public String getLink() { return link; }
+    public String getTitle() {
+        return title != null ? title : "International Scholarship";
+    }
 
+    public String getPubDate() {
+        return pubDate;
+    }
+
+    public String getLink() {
+        return link != null ? link : "https://www.scholars4dev.com/";
+    }
+
+    // 💡 الحماية اتعملت هنا
     public String getDescription() {
+        if (description == null || description.isEmpty()) {
+            return "No details available for this scholarship.";
+        }
         return description.replaceAll("<.*?>", "").trim();
     }
 }

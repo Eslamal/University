@@ -29,6 +29,8 @@ public class FavoritesActivity extends AppCompatActivity implements WebClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
 
+        findViewById(R.id.btn_back).setOnClickListener(v -> finish());
+
         recyclerView = findViewById(R.id.recycler_favorites);
 
         layoutEmpty = findViewById(R.id.layout_empty);

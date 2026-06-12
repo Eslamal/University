@@ -8,22 +8,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/purple_700"
         android:gravity="center_vertical"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:elevation="4dp">
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/btn_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/univ_logo"
-            android:background="@drawable/bg_circle_soft"
-            android:padding="4dp"/>
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"
+            app:tint="@color/white"
+            android:contentDescription="Back" />
 
         <TextView
+            android:id="@+id/tv_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="16dp"
             android:text="@string/ai_advisor_title"
             android:textColor="@color/white"
             android:textSize="20sp"

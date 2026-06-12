@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="menu_ai_chat">المستشار</string>
+    <string name="menu_gpa">المعدل</string>
+    <string name="menu_scholarships">المنح</string>
+    <string name="menu_schedule">الجدول</string>
+    <string name="menu_settings">الإعدادات</string>
+    <string name="menu_favorites">المفضلة</string>
+
+    <string name="search_header_title">ابحث عن الجامعة التي تريدها</string>
     <string name="hint_name">اسم الجامعة</string>
     <string name="hint_country">الدولة</string>
     <string name="btn_search">بحث</string>
     <string name="no_data">لا توجد نتائج!</string>
     <string name="visit_website">زيارة الموقع</string>
     <string name="favorites_title">المفضلة</string>
+    <string name="no_favorites">لا توجد جامعات في المفضلة!</string>
+
     <string name="settings_title">الإعدادات</string>
     <string name="language_label">اللغة</string>
     <string name="theme_label">المظهر</string>
@@ -14,7 +24,6 @@
     <string name="system_default">النظام الافتراضي</string>
     <string name="arabic">العربية</string>
     <string name="english">English</string>
-    <string name="no_favorites">لا توجد جامعات في المفضلة!</string>
 
     <string name="gpa_title">حاسبة التقديرات</string>
     <string name="your_gpa">المعدل التراكمي</string>
@@ -24,15 +33,37 @@
     <string name="hint_credits">الساعات</string>
     <string name="error_enter_credits">يرجى إدخال الساعات المعتمدة</string>
     <string name="gpa_desc">حاسبة المعدل</string>
-    <string name="or_text">— أو —</string>
+    <string name="or_text">&#8212; أو &#8212;</string>
 
     <string name="ai_advisor_title">مستشار الجامعات الذكي</string>
     <string name="chat_hint">اسأل عن المنح الدراسية...</string>
     <string name="ai_welcome_msg">أهلاً بك! أنا مستشارك الذكي للجامعات. اسألني عن المنح، أفضل الجامعات، أو المتطلبات.</string>
-
     <string name="ai_res_hello">مرحباً! كيف يمكنني مساعدتك اليوم؟</string>
     <string name="ai_res_scholarship">معظم الجامعات تقدم منحاً بناءً على التفوق أو الحاجة المادية. يمكنك مراجعة قسم "المساعدات المالية" في موقع الجامعة.</string>
     <string name="ai_res_harvard">جامعة هارفارد هي واحدة من أفضل الجامعات في العالم، وتقع في كامبريدج، الولايات المتحدة.</string>
     <string name="ai_res_gpa">يمكنك حساب معدلك التراكمي (GPA) باستخدام الأداة الموجودة في الصفحة الرئيسية للتطبيق!</string>
     <string name="ai_res_default">سؤال مثير للاهتمام! أنصحك بالبحث عن اسم الجامعة في شريط البحث لدينا للوصول لموقعهم الرسمي.</string>
+
+    <string name="sched_title">الجدول الدراسي</string>
+    <string name="sched_subtitle">نظم محاضراتك بكل سهولة</string>
+    <string name="fab_add_desc">إضافة محاضرة</string>
+    <string name="dialog_add_title">إضافة محاضرة جديدة</string>
+    <string name="dialog_edit_title">تعديل محاضرة</string>
+    <string name="hint_course">اسم المادة</string>
+    <string name="hint_room">القاعة / المبنى</string>
+    <string name="hint_prof">اسم الدكتور</string>
+    <string name="hint_day">اليوم</string>
+    <string name="hint_time">الوقت</string>
+    <string name="btn_save">حفظ</string>
+    <string name="btn_update">تحديث</string>
+    <string name="btn_delete">حذف</string>
+    <string name="msg_fill_fields">يرجى ملء الحقول المطلوبة</string>
+    <string name="msg_added">تمت إضافة المحاضرة!</string>
+    <string name="msg_updated">تم تحديث المحاضرة!</string>
+    <string name="msg_deleted">تم حذف المحاضرة!</string>
+    <string name="empty_schedule_title">لا توجد محاضرات بعد!</string>
+    <string name="empty_schedule_desc">اضغط على زر + لإضافة محاضرة</string>
+
+    <string name="news_title">أخبار التعليم</string>
+    <string name="read_more">اقرأ المزيد</string>
 </resources>

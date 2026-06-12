@@ -79,7 +79,7 @@
                 android:id="@+id/btn_apply"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Apply Now"
+                android:text="@string/read_more"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/purple_700"
                 app:cornerRadius="12dp"

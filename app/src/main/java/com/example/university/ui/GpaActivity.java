@@ -28,6 +28,8 @@ public class GpaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gpa);
 
+        findViewById(R.id.btn_back).setOnClickListener(v -> finish());
+
         layoutCourseList = findViewById(R.id.layout_course_list);
         tvResult = findViewById(R.id.tv_gpa_result);
         Button btnAdd = findViewById(R.id.btn_add_course);
@@ -86,4 +88,5 @@ public class GpaActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.error_enter_credits), Toast.LENGTH_SHORT).show();
         }
     }
+
 }

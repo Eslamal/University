@@ -8,15 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.university.R;
 import com.example.university.data.AppDatabase;
 import com.example.university.data.Lecture;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -28,15 +32,20 @@ public class ScheduleActivity extends AppCompatActivity {
     private AppDatabase database;
     private List<Lecture> lectureList = new ArrayList<>();
 
+    // تعريف المتغير بتاع الشاشة الفاضية
+    private LinearLayout layoutEmptyState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
-        TextView tvTitle = findViewById(R.id.header).findViewById(R.id.tv_header_title);
+        findViewById(R.id.btn_back).setOnClickListener(v -> finish());
 
         database = AppDatabase.getDatabase(this);
         recyclerView = findViewById(R.id.recycler_schedule);
+        layoutEmptyState = findViewById(R.id.layout_empty_state); // ربط التصميم
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         loadLectures();
@@ -47,6 +56,16 @@ public class ScheduleActivity extends AppCompatActivity {
 
     private void loadLectures() {
         lectureList = database.lectureDao().getAllLectures();
+
+        // 💡 فحص: هل الجدول فاضي؟
+        if (lectureList.isEmpty()) {
+            layoutEmptyState.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            layoutEmptyState.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+
         if (adapter == null) {
             adapter = new LectureAdapter(lectureList, this::showLectureDialog);
             recyclerView.setAdapter(adapter);

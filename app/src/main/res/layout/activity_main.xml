@@ -11,7 +11,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="@color/white"
+        android:elevation="4dp">
 
         <ImageView
             android:id="@+id/logo_img"
@@ -22,63 +24,27 @@
             android:contentDescription="@string/app_name" />
 
         <ImageButton
-            android:id="@+id/btn_settings"
+            android:id="@+id/btn_menu"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_settings"
+            android:src="@drawable/ic_menu"
             app:tint="@color/purple_700"
-            android:contentDescription="@string/settings_title" />
-        <ImageButton
-            android:id="@+id/btn_ai_chat"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_toStartOf="@id/btn_settings"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="12dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_robot"
-            app:tint="@color/purple_700"
-            android:contentDescription="AI Chatbot" />
-
-        <ImageButton
-            android:id="@+id/btn_gpa"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_toStartOf="@id/btn_ai_chat"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_calculator"
-            app:tint="@color/purple_700"
-            android:contentDescription="@string/gpa_desc" />
-        <ImageButton
-            android:id="@+id/btn_scholarships"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_toStartOf="@id/btn_gpa"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="12dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_school"
-            app:tint="@color/purple_700"
-            android:contentDescription="Scholarships" />
-
-        <ImageButton
-            android:id="@+id/btn_schedule"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_toStartOf="@id/btn_scholarships"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="12dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_schedule"
-            app:tint="@color/purple_700"
-            android:contentDescription="Lecture Schedule" />
-
+            android:contentDescription="Menu" />
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/search_header_title"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -145,7 +111,7 @@
                     android:src="@drawable/ic_search"
                     android:padding="12dp"
                     app:tint="@color/white"
-                    android:contentDescription="@string/btn_search" />
+                    android:contentDescription="Search" />
 
                 <ImageButton
                     android:id="@+id/button_show_favorites"
@@ -157,7 +123,7 @@
                     android:src="@drawable/ic_star_filled"
                     android:padding="12dp"
                     app:tint="@color/white"
-                    android:contentDescription="@string/favorites_title" />
+                    android:contentDescription="Favorites" />
 
             </LinearLayout>
         </LinearLayout>

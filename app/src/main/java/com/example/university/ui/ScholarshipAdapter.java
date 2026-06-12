@@ -35,16 +35,32 @@ public class ScholarshipAdapter extends RecyclerView.Adapter<ScholarshipAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Scholarship item = list.get(position);
 
-        holder.tvName.setText(item.getName());
+        String name = item.getName() != null ? item.getName() : "Scholarship";
+        holder.tvName.setText(name);
         holder.tvCountry.setText(item.getCountry());
         holder.tvDesc.setText(item.getDescription());
-        holder.tvLetter.setText(String.valueOf(item.getName().charAt(0)));
 
-        holder.layoutHeader.setBackgroundColor(context.getResources().getColor(item.getColorRes()));
+        // 💡 حماية أول حرف من الكراش
+        if (!name.isEmpty()) {
+            holder.tvLetter.setText(String.valueOf(name.charAt(0)));
+        } else {
+            holder.tvLetter.setText("S");
+        }
+
+        // 💡 حماية الألوان (الطريقة الأحدث والأكثر أماناً)
+        try {
+            holder.layoutHeader.setBackgroundColor(androidx.core.content.ContextCompat.getColor(context, item.getColorRes()));
+        } catch (Exception e) {
+            holder.layoutHeader.setBackgroundColor(android.graphics.Color.GRAY);
+        }
 
         holder.btnApply.setOnClickListener(v -> {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getLink()));
-            context.startActivity(browserIntent);
+            try {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getLink()));
+                context.startActivity(browserIntent);
+            } catch (Exception e) {
+                // منع الكراش لو الرابط بايظ
+            }
         });
     }
 

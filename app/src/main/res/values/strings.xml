@@ -1,11 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">University</string>
+    <string name="menu_ai_chat">AI Chat</string>
+    <string name="menu_gpa">GPA</string>
+    <string name="menu_scholarships">Scholarships</string>
+    <string name="menu_schedule">Schedule</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_favorites">Favorites</string>
+
+    <string name="search_header_title">Find Your Desired University</string>
     <string name="hint_name">University Name</string>
     <string name="hint_country">Country</string>
     <string name="btn_search">Search</string>
     <string name="no_data">No Data Found!</string>
     <string name="visit_website">Visit Website</string>
     <string name="favorites_title">My Favorites</string>
+    <string name="no_favorites">No Favorites Added Yet!</string>
+
     <string name="settings_title">Settings</string>
     <string name="language_label">Language</string>
     <string name="theme_label">Theme</string>
@@ -14,7 +25,6 @@
     <string name="system_default">System Default</string>
     <string name="arabic">العربية</string>
     <string name="english">English</string>
-    <string name="no_favorites">No Favorites Added Yet!</string>
 
     <string name="gpa_title">GPA Calculator</string>
     <string name="your_gpa">Your GPA</string>
@@ -24,16 +34,13 @@
     <string name="hint_credits">Credits</string>
     <string name="error_enter_credits">Please enter credit hours</string>
     <string name="gpa_desc">Calculate GPA</string>
-    <string name="or_text">— OR —</string>
+    <string name="or_text">&#8212; OR &#8212;</string>
 
     <string name="ai_advisor_title">AI University Advisor</string>
     <string name="chat_hint">Ask about scholarships...</string>
     <string name="ai_welcome_msg">Hello! I am your University AI Advisor. Ask me about scholarships, top universities, or requirements.</string>
-
     <string name="ai_res_hello">Hi there! How can I help you today?</string>
-
     <string name="ai_res_scholarship">Most universities offer scholarships based on merit or financial need. You can check the \'Financial Aid\' section on their websites.</string>
-
     <string name="ai_res_harvard">Harvard University is one of the top universities in the world, located in Cambridge, USA.</string>
     <string name="ai_res_gpa">You can calculate your GPA using the tool in our app\'s home screen!</string>
     <string name="ai_res_default">That\'s an interesting question! I recommend searching for the specific university name in our search bar to find their official website.</string>
@@ -41,7 +48,6 @@
     <string name="sched_title">Weekly Schedule</string>
     <string name="sched_subtitle">Manage your lectures effectively</string>
     <string name="fab_add_desc">Add Lecture</string>
-
     <string name="dialog_add_title">Add New Lecture</string>
     <string name="dialog_edit_title">Edit Lecture</string>
     <string name="hint_course">Course Name (e.g. Java)</string>
@@ -49,7 +55,6 @@
     <string name="hint_prof">Professor Name</string>
     <string name="hint_day">Day (e.g. Monday)</string>
     <string name="hint_time">Time (e.g. 10:00 AM)</string>
-
     <string name="btn_save">Save</string>
     <string name="btn_update">Update</string>
     <string name="btn_delete">Delete</string>
@@ -57,4 +62,9 @@
     <string name="msg_added">Lecture Added!</string>
     <string name="msg_updated">Lecture Updated!</string>
     <string name="msg_deleted">Lecture Deleted!</string>
+    <string name="empty_schedule_title">No lectures added yet!</string>
+    <string name="empty_schedule_desc">Click the + button to add one</string>
+
+    <string name="news_title">Education News</string>
+    <string name="read_more">Read More</string>
 </resources>

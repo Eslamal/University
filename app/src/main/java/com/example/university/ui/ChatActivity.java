@@ -2,9 +2,10 @@ package com.example.university.ui;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,14 +30,19 @@ public class ChatActivity extends AppCompatActivity {
     private EditText etMessage;
     private ImageButton btnSend;
 
-    private static final String API_KEY = "AIzaSyDYD9hxiVBOoz8LxgwxVBjxxC5Qro8SZEA";
+    // ⚠️ تأكد إن المفتاح ده بتاعك ومفيش أي مسافات قبله أو بعده
+    private static final String API_KEY = "AQ.Ab8RN6JRKkmNMyld71SUTjMZpBvrifwtg2bOWW4KLTGoNmnBKg";
 
+    // 💡 هنستخدم gemini-pro لأنه الأكثر استقراراً ومدعوم في كل الحسابات
+// الرابط الأحدث والأسرع (Gemini 1.5 Flash)
+// الرابط الصحيح للإصدار الحديث اللي شغال حالياً
     private static final String URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + API_KEY;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        findViewById(R.id.btn_back).setOnClickListener(v -> finish());
 
         recyclerView = findViewById(R.id.recycler_chat);
         etMessage = findViewById(R.id.et_message);
@@ -53,7 +59,7 @@ public class ChatActivity extends AppCompatActivity {
             if (!text.isEmpty()) {
                 sendMessage(text);
                 etMessage.setText("");
-
+                hideKeyboard();
                 callGeminiAI(text);
             }
         });
@@ -112,20 +118,23 @@ public class ChatActivity extends AppCompatActivity {
 
                         runOnUiThread(() -> {
                             if (adapter != null) adapter.removeLastItem();
-
                             receiveBotResponse(aiReply);
                         });
 
                     } catch (Exception e) {
                         runOnUiThread(() -> {
                             if (adapter != null) adapter.removeLastItem();
-                            receiveBotResponse("Error parsing response.");
+                            receiveBotResponse("Error parsing JSON. Check Logcat.");
+                            Log.e("GeminiError", "Parsing error", e);
                         });
                     }
                 } else {
+                    // 🚨 التعديل السحري هنا: هنقرأ رسالة الخطأ من جوجل ونعرضها
+                    String errorDetails = response.body() != null ? response.body().string() : "No details";
                     runOnUiThread(() -> {
                         if (adapter != null) adapter.removeLastItem();
-                        receiveBotResponse("Error: " + response.code());
+                        receiveBotResponse("Error Code: " + response.code() + "\n\nReason: " + errorDetails);
+                        Log.e("GeminiError", errorDetails);
                     });
                 }
             }
@@ -134,5 +143,13 @@ public class ChatActivity extends AppCompatActivity {
 
     private String escapeJson(String data) {
         return data.replace("\"", "\\\"").replace("\n", "\\n");
+    }
+
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

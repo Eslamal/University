@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.PopupMenu; // مهمة جداً
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
 
     private RecyclerView recyclerView;
     private UnivAdapter adapter;
-    private ImageButton button_search, btnSettings;
+    private ImageButton button_search;
     private EditText editText_name, editText_country;
     private ProgressBar progressBar;
     private LottieAnimationView animationView;
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         univViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(UnivViewModel.class);
@@ -53,10 +56,9 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
         editText_country = findViewById(R.id.editText_country);
         button_search = findViewById(R.id.button_search);
         progressBar = findViewById(R.id.loader);
-
         animationView = findViewById(R.id.animation_view);
-        btnSettings = findViewById(R.id.btn_settings);
 
+        // --- زرار البحث ---
         button_search.setOnClickListener(view -> {
             String name = editText_name.getText().toString().trim();
             String country = editText_country.getText().toString().trim();
@@ -68,43 +70,47 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
             univViewModel.searchUniversities(name, country);
         });
 
-
+        // --- زرار المفضلة ---
         ImageButton buttonShowFavorites = findViewById(R.id.button_show_favorites);
         buttonShowFavorites.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, FavoritesActivity.class);
             startActivity(intent);
         });
 
-        ImageButton btnScholarships = findViewById(R.id.btn_scholarships);
+        // --- برمجة القائمة المنسدلة (Popup Menu) ---
+        ImageButton btnMenu = findViewById(R.id.btn_menu);
+        btnMenu.setOnClickListener(v -> {
+            PopupMenu popup = new PopupMenu(MainActivity.this, btnMenu);
+            popup.getMenuInflater().inflate(R.menu.drawer_menu, popup.getMenu());
 
-        btnScholarships.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ScholarshipActivity.class);
-            startActivity(intent);
-        });
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    int id = item.getItemId();
 
-        ImageButton btnSchedule = findViewById(R.id.btn_schedule);
-
-        btnSchedule.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ScheduleActivity.class);
-            startActivity(intent);
-        });
-
-
-        ImageButton btnAiChat = findViewById(R.id.btn_ai_chat);
-        btnAiChat.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
-            startActivity(intent);
-        });
-
-        btnSettings.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(intent);
-        });
-        ImageButton btnGpa = findViewById(R.id.btn_gpa);
-
-        btnGpa.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, GpaActivity.class);
-            startActivity(intent);
+                    if (id == R.id.nav_favorites) {
+                        startActivity(new Intent(MainActivity.this, FavoritesActivity.class));
+                        return true;
+                    } else if (id == R.id.nav_ai_chat) {
+                        startActivity(new Intent(MainActivity.this, ChatActivity.class));
+                        return true;
+                    } else if (id == R.id.nav_gpa) {
+                        startActivity(new Intent(MainActivity.this, GpaActivity.class));
+                        return true;
+                    } else if (id == R.id.nav_scholarships) {
+                        startActivity(new Intent(MainActivity.this, ScholarshipActivity.class));
+                        return true;
+                    } else if (id == R.id.nav_schedule) {
+                        startActivity(new Intent(MainActivity.this, ScheduleActivity.class));
+                        return true;
+                    } else if (id == R.id.nav_settings) {
+                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            popup.show();
         });
     }
 
@@ -135,15 +141,12 @@ public class MainActivity extends AppCompatActivity implements WebClickListener 
         univViewModel.getError().observe(this, errorMessage -> {
             if (errorMessage != null && !errorMessage.isEmpty()) {
                 Log.e("API_ERROR", "سبب المشكلة: " + errorMessage);
-
                 Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
-
                 showEmptyState();
             }
         });
 
         univViewModel.getAllFavorites().observe(this, favorites -> {
-            Log.d("FAVORITES_DEBUG", "Favorites list updated. Count: " + favorites.size());
             this.favoritesList = favorites;
             if (adapter != null) {
                 adapter.setFavorites(favorites);

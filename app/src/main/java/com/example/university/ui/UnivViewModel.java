@@ -48,18 +48,10 @@ public class UnivViewModel extends AndroidViewModel {
 
             @Override
             public void onError(String message) {
-
-                List<APIResponse> fakeList = new java.util.ArrayList<>();
-                fakeList.add(new APIResponse("Harvard University", "United States", "US", "http://www.harvard.edu"));
-                fakeList.add(new APIResponse("University of Oxford", "United Kingdom", "GB", "http://www.ox.ac.uk"));
-                fakeList.add(new APIResponse("Stanford University", "United States", "US", "http://www.stanford.edu"));
-                fakeList.add(new APIResponse("Cairo University", "Egypt", "EG", "http://cu.edu.eg"));
-                fakeList.add(new APIResponse("King Saud University", "Saudi Arabia", "SA", "http://ksu.edu.sa"));
-                fakeList.add(new APIResponse("Massachusetts Institute of Technology (MIT)", "United States", "US", "http://web.mit.edu"));
-                universityList.postValue(fakeList);
-
+                // تم إزالة البيانات الوهمية (Fake Data)
+                // الآن سيعرض رسالة خطأ حقيقية إذا فشل الاتصال بالإنترنت
+                error.postValue("Error: " + message);
                 isLoading.postValue(false);
-
             }
         }, queryName, queryCountry);
     }
