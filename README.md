@@ -29,7 +29,8 @@ Here is a glimpse of the app's clean and modern UI, fully supporting both Light 
 | ![Screen 1](screens/1.jpg) | ![Screen 2](screens/2.jpg) | ![Screen 3](screens/3.jpg) |
 | ![Screen 4](screens/4.jpg) | ![Screen 5](screens/5.jpg) | ![Screen 6](screens/6.jpg) |
 | ![Screen 7](screens/7.jpg) | ![Screen 8](screens/8.jpg) | ![Screen 9](screens/9.jpg) |
-| ![Screen 10](screens/10.jpg) | ![Screen 11](screens/11.jpg) | |
+| ![Screen 10](screens/10.jpg) | ![Screen 11](screens/11.jpg) | ![Screen 12](screens/12.jpg) |
+| ![Screen 13](screens/13.jpg) | ![Screen 14](screens/14.jpg) |
 
 ---
 
