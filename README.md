@@ -1,10 +1,9 @@
 # 🎓 University App - Your Smart Academic Companion
 
-[![Available on Uptodown](https://img.shields.io/badge/Available_on-Uptodown-blue?style=for-the-badge&logo=uptodown)](https://en.uptodown.com/) <!-- ضيف لينك التطبيق بتاعك هنا بدل اللينك العام -->
-[![Android Version](https://img.shields.io/badge/Android-5.0+-brightgreen.svg?style=flat-square)](https://developer.android.com/)
+[![Available on Uptodown](https://img.shields.io/badge/Available_on-Uptodown-blue?style=for-the-badge&logo=uptodown)](https://en.uptodown.com/) [![Android Version](https://img.shields.io/badge/Android-5.0+-brightgreen.svg?style=flat-square)](https://developer.android.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**University App** is a comprehensive, native Android application meticulously designed to assist students in their daily academic life. From exploring global universities to managing weekly lecture schedules and calculating GPA, this app serves as an all-in-one student hub. It even features an integrated **Artificial Intelligence (Gemini)** assistant to act as a 24/7 personal academic advisor.
+**University App** is a comprehensive, native Android application meticulously designed to assist students in their daily academic life. From exploring global universities to managing weekly lecture schedules, tracking absences, and calculating GPA, this app serves as an all-in-one student hub. It even features an integrated **Artificial Intelligence (Gemini)** assistant to act as a 24/7 personal academic advisor and a smart notes summarizer.
 
 ---
 
@@ -13,10 +12,11 @@
 University students often struggle with disorganization, relying on multiple fragmented apps to manage their academic life. 
 * They use a browser to find scholarships and universities.
 * A notepad or gallery image to check their lecture schedule.
+* They easily lose track of their absences, risking course disqualification.
+* They spend hours trying to manually summarize lengthy lecture notes.
 * A separate calculator or website to compute their GPA.
-* Forums or search engines to seek academic advice.
 
-**The Solution:** This application aggregates all these essential tools into a single, cohesive, and user-friendly platform, saving time and boosting productivity.
+**The Solution:** This application aggregates all these essential tools into a single, cohesive, and user-friendly platform, saving time, preventing academic penalties, and boosting overall productivity.
 
 ---
 
@@ -43,8 +43,8 @@ This project is built using **Native Android (Java)** following the **MVVM (Mode
 | **MVVM Architecture** | Project Structure | To strictly separate UI components from business logic, making the codebase highly maintainable. |
 | **Room Database** | Schedule & Favorites | To cache data locally. It provides an abstraction layer over SQLite to allow fluent database access and offline functionality. |
 | **Retrofit 2** | University Search | To handle REST API requests efficiently. Chosen for its speed, type safety, and seamless JSON parsing. |
-| **OkHttp 3** | AI Chat Module | Used to manually handle HTTP requests, timeouts, and JSON bodies for communicating directly with the Gemini API. |
-| **Google Gemini API** | AI Advisor | To provide intelligent, context-aware, and conversational responses to student inquiries. |
+| **OkHttp 3** | AI Modules | Used to manually handle HTTP requests, timeouts, and JSON bodies for communicating directly with the Gemini API. |
+| **Google Gemini API** | AI Advisor & Summarizer | To provide intelligent, context-aware conversational responses and process long texts into structured summaries. |
 | **LiveData & ViewModel** | UI Updates | To observe data changes dynamically and update the UI without memory leaks (Lifecycle-aware). |
 | **Lottie Animations** | Loading & Empty States | To provide a modern, highly engaging user experience during data fetching or when lists are empty. |
 | **Material Design** | UI/UX | Extensive use of `CardView`, `RecyclerView`, and custom drawables for a modern, adaptive interface. |
@@ -67,28 +67,32 @@ Building a feature-rich application comes with its hurdles. Here are the major c
 * **Challenge:** Pushing the Google Gemini API key directly to GitHub exposes it to security risks and automatic revocation by Google.
 * **Solution:** Moved the API key to the `local.properties` file (which is git-ignored) and used the `Secrets Gradle Plugin` / `BuildConfig` to securely inject the key into the app at compile time.
 
-### 4. 📴 Offline Data Persistence
-* **Challenge:** Students need access to their lecture schedules even without internet access.
-* **Solution:** Implemented **Room Database** to save lectures and favorite universities locally on the device. This guarantees instant access to crucial data regardless of network connectivity.
+### 4. 📴 Offline Data Persistence with Migrations
+* **Challenge:** Adding new features like an "Attendance Tracker" required altering the existing local database structure without crashing the app for existing users.
+* **Solution:** Implemented **Room Database** with proper entity updates to save lectures, track absences, and store favorite universities locally, guaranteeing instant access to crucial data regardless of network connectivity.
 
 ---
 
 ## 💡 Core Features (Modules)
 
-### 1. 🔍 Global University Search
+### 1. 🤖 AI Notes Summarizer (New)
+* A dedicated tool powered by **Gemini AI** to process lengthy lecture texts or study materials.
+* Instantly converts long paragraphs into clear, structured, and easy-to-read bullet points for faster studying.
+
+### 2. 📅 Offline Lecture Schedule & Attendance Tracker
+* A complete CRUD module to manage weekly classes (course name, time, professor, room number, and day).
+* **Smart Attendance Tracking:** Increment or decrement absences directly from the schedule card, with visual red-color warnings when approaching the absence limit.
+
+### 3. 💬 AI Academic Advisor
+* An interactive chat interface where students can seek personalized advice on studying, scholarships, and career paths using AI.
+* Modern chat bubble UI mimicking popular messaging apps.
+
+### 4. 🔍 Global University Search
 * Live search functionality by university name or country via REST APIs.
 * Direct external links to official university websites.
 * Ability to save universities to a local "Favorites" list.
 
-### 2. 🤖 AI Academic Advisor (Powered by Gemini)
-* An interactive chat interface where students can seek advice on studying, scholarships, and career paths.
-* Modern chat bubble UI mimicking popular messaging apps.
-
-### 3. 📅 Offline Lecture Schedule
-* A complete CRUD module to manage weekly classes.
-* Add course name, time, professor, room number, and day.
-
-### 4. 🎓 Scholarships & GPA Calculator
+### 5. 🎓 Scholarships & GPA Calculator
 * **Scholarships Hub:** Browse fully funded global scholarships (e.g., Chevening) with one-click access to more details.
 * **Smart GPA Calculator:** Dynamically add courses, credits, and grades to accurately calculate the semester GPA.
 
