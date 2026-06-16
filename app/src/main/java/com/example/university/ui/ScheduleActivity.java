@@ -65,7 +65,20 @@ public class ScheduleActivity extends AppCompatActivity {
         }
 
         if (adapter == null) {
-            adapter = new LectureAdapter(lectureList, this::showLectureDialog);
+            // استبدال الـ Lambda بالـ Anonymous Inner Class لدعم الدالتين
+            adapter = new LectureAdapter(lectureList, new LectureAdapter.OnLectureClickListener() {
+                @Override
+                public void onLectureClick(Lecture lecture) {
+                    // فتح الديالوج لتعديل أو حذف المحاضرة
+                    showLectureDialog(lecture);
+                }
+
+                @Override
+                public void onAbsenceUpdated(Lecture lecture) {
+                    // حفظ الرقم الجديد لمرات الغياب في قاعدة البيانات فوراً
+                    database.lectureDao().update(lecture);
+                }
+            });
             recyclerView.setAdapter(adapter);
         } else {
             adapter.updateList(lectureList);

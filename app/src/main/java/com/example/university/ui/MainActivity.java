@@ -20,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, ChatActivity.class));
         });
 
+        findViewById(R.id.card_summarizer).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, SummarizerActivity.class));
+        });
+
         findViewById(R.id.card_gpa).setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, GpaActivity.class));
         });

@@ -89,4 +89,21 @@
     <string name="lang_system">System Default</string>
     <string name="dialog_oops">Oops!</string>
     <string name="dialog_ok">Okay, Got it</string>
+    <string name="absence_count">Absences: </string>
+    <string name="cd_add_absence">Add Absence</string>
+    <string name="cd_remove_absence">Remove Absence</string>
+    <string name="dash_summarizer_title">AI Summarizer</string>
+    <string name="dash_summarizer_desc">Summarize long lectures into bullet points</string>
+
+    <string name="summarizer_title">AI Notes Summarizer</string>
+    <string name="summarizer_hint">Paste or type long lecture text here...</string>
+    <string name="btn_summarize_text">Summarize Lecture 🪄</string>
+    <string name="summary_result_title">💡 Visual Lecture Summary:</string>
+
+    <string name="msg_empty_text">Please enter the lecture text first!</string>
+    <string name="msg_connection_failed">Failed to connect to the server! Check your internet.</string>
+    <string name="msg_ai_error">Error processing data from AI.</string>
+    <string name="ai_summarizer_prompt">You are a professional academic assistant.
+        Summarize the following text comprehensively and systematically into clear,
+        easy-to-read bullet points to facilitate studying for a university student:\n\n</string>
 </resources>

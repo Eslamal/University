@@ -88,4 +88,19 @@
     <string name="lang_system">لغة الجهاز</string>
     <string name="dialog_oops">عفواً!</string>
     <string name="dialog_ok">حسناً، فهمت</string>
+    <string name="absence_count">مرات الغياب: </string>
+    <string name="cd_add_absence">إضافة غياب</string>
+    <string name="cd_remove_absence">إنقاص غياب</string>
+    <string name="dash_summarizer_title">التلخيص الذكي</string>
+    <string name="dash_summarizer_desc">لخّص المحاضرات الطويلة في نقاط سريعة</string>
+
+    <string name="summarizer_title">ملخص المحاضرات الذكي</string>
+    <string name="summarizer_hint">انسخ أو اكتب نص المحاضرة الطويل هنا...</string>
+    <string name="btn_summarize_text">لخّص المحاضرة بالنظام 🪄</string>
+    <string name="summary_result_title">💡 ملخص المحاضرة البصري:</string>
+
+    <string name="msg_empty_text">من فضلك أدخل نص المحاضرة أولاً!</string>
+    <string name="msg_connection_failed">فشل الاتصال بالسيرفر! تحقق من الإنترنت.</string>
+    <string name="msg_ai_error">حدث خطأ في معالجة البيانات من الذكاء الاصطناعي.</string>
+    <string name="ai_summarizer_prompt">أنت مساعد أكاديمي محترف. قم بتلخيص النص التالي تلخيصاً وافياً وممنهجاً في شكل نقاط (Bullet points) واضحة ومريحة للعين لتسهيل المذاكرة على الطالب الجامعي:\n\n</string>
 </resources>
