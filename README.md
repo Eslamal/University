@@ -1,6 +1,6 @@
 # 🎓 University App - Your Smart Academic Companion
 
-[![Available on Uptodown](https://com-eslam-universityappp.en.uptodown.com/android)](https://en.uptodown.com/) [![Android Version](https://img.shields.io/badge/Android-5.0+-brightgreen.svg?style=flat-square)](https://developer.android.com/)
+[![Available on Uptodown](https://com-eslam-universityappp.en.uptodown.com/android)]) [![Android Version](https://img.shields.io/badge/Android-5.0+-brightgreen.svg?style=flat-square)](https://developer.android.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **University App** is a comprehensive, native Android application meticulously designed to assist students in their daily academic life. From exploring global universities to managing weekly lecture schedules, tracking absences, and calculating GPA, this app serves as an all-in-one student hub. It even features an integrated **Artificial Intelligence (Gemini)** assistant to act as a 24/7 personal academic advisor and a smart notes summarizer.
