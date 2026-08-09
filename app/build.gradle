@@ -12,11 +12,11 @@ android {
         buildConfig = true
     }
     defaultConfig {
-        applicationId "com.eslam.universityapp"
-        minSdk 29
+        applicationId "com.eslam.universityappp"
+        minSdk 27
         targetSdk 34
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
