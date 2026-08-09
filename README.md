@@ -105,6 +105,7 @@ Building a feature-rich application comes with its hurdles. Here are the major c
 * 📱 Android Developer
 * 📧 Email: eslameng776@gmail.com
 * 🔗 GitHub: [Eslamal](https://github.com/Eslamal)
+* 🔗 Uptodown: [https://com-eslam-universityappp.en.uptodown.com/android]
 
 ---
 *If you find this project useful, don't forget to give it a ⭐ on GitHub!*
